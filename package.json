@@ -1,0 +1,28 @@
+{
+  "name": "shortify",
+  "version": "1.0.0",
+  "description": "Link shortifier",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmeshavkin/shortify.git"
+  },
+  "author": "Meshavkin Konstantin <meshavkin1996@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kmeshavkin/shortify/issues"
+  },
+  "homepage": "https://github.com/kmeshavkin/shortify#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
