@@ -4,7 +4,9 @@
   "description": "Link shortifier",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.ts",
+    "dev": "concurrently \"npm run dev:be\" \"npm run dev:fe\"",
+    "dev:be": "nodemon app.ts",
+    "dev:fe": "npm run start --prefix client",
     "start": "node -r esm app.ts"
   },
   "repository": {
