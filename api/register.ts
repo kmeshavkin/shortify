@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { check, validationResult } from 'express-validator';
 import { UserModel } from '../models/User';
 
-const SALT = 32095874;
+const SALT = 10;
 
 const router = Router();
 router.post(
