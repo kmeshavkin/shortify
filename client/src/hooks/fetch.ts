@@ -4,7 +4,7 @@ type requestFunc = (url: string, method?: RequestInit['method'], body?: any, hea
 
 export const useFetch = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | string>(null);
 
   const doFetch: requestFunc = useCallback(async (url, method = 'GET', body, headers = {}) => {
     setLoading(true);
@@ -23,7 +23,7 @@ export const useFetch = () => {
     } catch (e) {
       setLoading(false);
       setError(e.message);
-      throw e;
+      // throw e;
     }
   }, []);
 
