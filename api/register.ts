@@ -1,9 +1,8 @@
 import bcrypt from 'bcryptjs';
 import { Router } from 'express';
 import { check, validationResult } from 'express-validator';
+import config from 'config';
 import { UserModel } from '../models/User';
-
-const SALT = 10;
 
 const router = Router();
 router.post(
@@ -27,7 +26,7 @@ router.post(
       const candidate = await UserModel.findOne({ username });
       if (candidate) return res.status(400).json({ message: 'Username already exists' });
 
-      const hashedPassword = await bcrypt.hash(password, SALT);
+      const hashedPassword = await bcrypt.hash(password, config.get('salt'));
       const user = new UserModel({ username, password: hashedPassword });
       await user.save();
 

@@ -1,10 +1,9 @@
 import bcrypt from 'bcryptjs';
+import config from 'config';
 import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import { validationResult, check } from 'express-validator';
 import { UserModel } from '../models/User';
-
-const JWT_SECRET = 'j54w634t&';
 
 const router = Router();
 router.post(
@@ -34,7 +33,7 @@ router.post(
 
       const token = jwt.sign(
         { userId: user.id },
-        JWT_SECRET,
+        config.get('jwtSecret'),
         { expiresIn: '1h' },
       );
 
