@@ -3,12 +3,13 @@ import mongoose from 'mongoose';
 import config from 'config';
 import { loginRouter } from './api/login';
 import { registerRouter } from './api/register';
-import { MONGO_URL } from './local-config';
+import { linkRouter } from './api/link';
 
 const app = express();
 app.use(express.json());
 app.use('/api', loginRouter);
 app.use('/api', registerRouter);
+app.use('/api/link', linkRouter);
 
 const PORT = config.get('port');
 
