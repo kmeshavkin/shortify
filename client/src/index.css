@@ -1,0 +1,6 @@
+body {
+  max-width: 1024px;
+  min-height: 100vh;
+  margin: auto !important;
+  box-shadow: 0 8px 24px rgba(38,202,153,.24);
+}

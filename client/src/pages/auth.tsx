@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Button, InputGroup, Label, Toaster,
 } from '@blueprintjs/core';
-import styles from './auth.scss';
+import styles from './auth.module.scss';
 import { useFetch } from '../hooks/fetch';
+import { AuthContext } from '../context/AuthContext';
 
 interface IForm {
   username: string,
@@ -11,6 +12,7 @@ interface IForm {
 }
 
 export const AuthPage = (): JSX.Element => {
+  const auth = useContext(AuthContext);
   const {
     loading, error, clearError, doFetch,
   } = useFetch();
@@ -35,7 +37,8 @@ export const AuthPage = (): JSX.Element => {
 
   const loginHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    await doFetch('api/login', 'POST', { ...form });
+    const data = await doFetch('api/login', 'POST', { ...form });
+    if (data) auth.login(data.token, data.userId);
   };
 
   return (
@@ -43,11 +46,11 @@ export const AuthPage = (): JSX.Element => {
       <h2>Auth</h2>
       <Label>
         Username
-        <InputGroup name="username" type="Username" onChange={changeHandler} />
+        <InputGroup name="username" type="username" autoFocus onChange={changeHandler} />
       </Label>
       <Label>
         Password
-        <InputGroup name="password" type="Password" onChange={changeHandler} />
+        <InputGroup name="password" type="password" onChange={changeHandler} />
       </Label>
       <Button text="Login" disabled={loading} onClick={loginHandler} />
       <Button text="Register" disabled={loading} onClick={registerHandler} />
