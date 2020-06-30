@@ -5,7 +5,7 @@ import {
 export interface IUser extends Document {
   username: string,
   password: string,
-  links: any[]
+  links: string[]
 }
 
 const schema = new Schema({
