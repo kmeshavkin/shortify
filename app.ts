@@ -4,12 +4,14 @@ import config from 'config';
 import { loginRouter } from './api/login';
 import { registerRouter } from './api/register';
 import { linkRouter } from './api/link';
+import { redirectRouter } from './api/redirect';
 
 const app = express();
 app.use(express.json());
 app.use('/api', loginRouter);
 app.use('/api', registerRouter);
 app.use('/api/link', linkRouter);
+app.use('/t', redirectRouter);
 
 const PORT = config.get('port');
 
