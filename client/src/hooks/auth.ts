@@ -3,17 +3,19 @@ import { useState, useCallback, useEffect } from 'react';
 export interface IUseAuth {
   token: string | null;
   userId: string | null;
+  loaded: boolean;
   login: (jwtToken: IUseAuth['token'], id: IUseAuth['userId']) => void;
   logout: () => void;
 }
 
 export const useAuth = (): IUseAuth => {
   const [token, setToken] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [userId, setUserId] = useState<string | null>(null);
 
   const login = useCallback((jwtToken, id) => {
     setToken(jwtToken);
-    setToken(id);
+    setUserId(id);
 
     localStorage.setItem('userData', JSON.stringify({ token: jwtToken, userId: id }));
   }, []);
@@ -32,9 +34,10 @@ export const useAuth = (): IUseAuth => {
         login(data.token, data.userId);
       }
     }
+    setLoaded(true);
   }, [login]);
 
   return {
-    token, userId, login, logout,
+    token, userId, loaded, login, logout,
   };
 };

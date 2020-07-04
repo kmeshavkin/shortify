@@ -8,6 +8,7 @@ export interface IAuthContext extends IUseAuth {
 export const AuthContext = createContext<IAuthContext>({
   token: null,
   userId: null,
+  loaded: false,
   login(token, userId) { },
   logout() { },
   isAuthenticated: false,

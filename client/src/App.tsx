@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Spinner } from '@blueprintjs/core';
 import { useRoutes } from './routes';
 import { useAuth } from './hooks/auth';
 import { AuthContext } from './context/AuthContext';
@@ -8,13 +9,16 @@ import styles from './App.module.scss';
 
 function App() {
   const {
-    token, userId, login, logout,
+    token, userId, loaded, login, logout,
   } = useAuth();
   const isAuthenticated = !!token;
   const routes = useRoutes(isAuthenticated);
+
+  if (!loaded) return <Spinner />;
+
   return (
     <AuthContext.Provider value={{
-      token, userId, login, logout, isAuthenticated,
+      token, userId, login, logout, loaded, isAuthenticated,
     }}
     >
       <BrowserRouter>

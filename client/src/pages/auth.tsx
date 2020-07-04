@@ -46,11 +46,11 @@ export const AuthPage = (): JSX.Element => {
       <h2>Auth</h2>
       <Label>
         Username
-        <InputGroup name="username" type="username" autoFocus onChange={changeHandler} />
+        <InputGroup name="username" type="username" autoFocus value={form.username} onChange={changeHandler} />
       </Label>
       <Label>
         Password
-        <InputGroup name="password" type="password" onChange={changeHandler} />
+        <InputGroup name="password" type="password" value={form.password} onChange={changeHandler} />
       </Label>
       <Button text="Login" disabled={loading} onClick={loginHandler} />
       <Button text="Register" disabled={loading} onClick={registerHandler} />

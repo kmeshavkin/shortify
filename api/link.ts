@@ -28,7 +28,7 @@ router.post('/generate', AuthMiddleware, async (req: any, res) => { // ???
   }
 });
 
-router.post('/', AuthMiddleware, async (req: any, res) => { // ???
+router.get('/', AuthMiddleware, async (req: any, res) => { // ???
   try {
     const links = await LinkModel.find({ owner: req.user.userId });
     return res.json(links);
