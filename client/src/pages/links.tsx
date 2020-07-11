@@ -1,7 +1,7 @@
 import React, {
   useState, useCallback, useContext, useEffect,
 } from 'react';
-import { Spinner } from '@blueprintjs/core';
+import { Spinner, Button } from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
 import { AuthContext } from '../context/AuthContext';
 import { ILink } from '../../../models/Link';
@@ -13,6 +13,13 @@ export const LinksPage = () => {
 
   const fetchLinks = useCallback(async () => {
     const fetched = await doFetch('/api/link', 'GET', null, {
+      authorization: `Bearer ${token}`,
+    });
+    setLinks(fetched);
+  }, [token, doFetch]);
+
+  const deleteLink = useCallback(async (id) => {
+    const fetched = await doFetch(`/api/link/delete/${id}`, 'POST', null, {
       authorization: `Bearer ${token}`,
     });
     setLinks(fetched);
@@ -45,6 +52,7 @@ export const LinksPage = () => {
             {' '}
             {link.clicksLeft === -1 ? 'Unlimited' : link.clicksLeft}
           </p>
+          <Button icon="trash" onClick={() => deleteLink(link._id)} />
         </div>
       ))}
     </div>

@@ -46,4 +46,14 @@ router.post('/:id', AuthMiddleware, async (req, res) => {
   }
 });
 
+router.post('/delete/:id', AuthMiddleware, async (req: any, res) => {
+  try {
+    await LinkModel.deleteOne({ _id: req.params.id });
+    const links = await LinkModel.find({ owner: req.user.userId });
+    return res.json(links);
+  } catch (error) {
+    return res.status(500).json({ message: 'Something went wrong' });
+  }
+});
+
 export const linkRouter = router;
