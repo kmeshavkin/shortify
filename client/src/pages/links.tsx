@@ -41,9 +41,9 @@ export const LinksPage = () => {
             {link.to}
           </p>
           <p>
-            Clicks:
+            Link clicks left:
             {' '}
-            {link.clicks}
+            {link.clicksLeft === -1 ? 'Unlimited' : link.clicksLeft}
           </p>
         </div>
       ))}

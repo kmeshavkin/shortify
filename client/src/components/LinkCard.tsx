@@ -15,9 +15,9 @@ export const LinkCard = (link: ILink) => (
       {link.to}
     </p>
     <p>
-      Link clicks:
+      Link clicks left:
       {' '}
-      {link.clicks}
+      {link.clicksLeft === -1 ? 'Unlimited' : link.clicksLeft}
     </p>
     <p>
       Creation date:

@@ -6,20 +6,20 @@ import { AuthMiddleware } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.post('/generate', AuthMiddleware, async (req: any, res) => { // ???
+router.post('/generate', AuthMiddleware, async (req: any, res) => {
   try {
     const baseUrl = config.get('baseURL');
-    const { from } = req.body;
-    const existing = await LinkModel.findOne({ from });
-    if (existing) {
-      return res.json({ link: existing });
-    }
+    const { from, clicksLeft } = req.body;
 
     const code = shortid.generate();
     const to = `${baseUrl}/t/${code}`;
 
     const link = new LinkModel({
-      code, to, from, owner: req.user.userId,
+      code,
+      to,
+      from,
+      owner: req.user.userId,
+      clicksLeft,
     });
     await link.save();
     return res.status(201).json({ link });
@@ -28,7 +28,7 @@ router.post('/generate', AuthMiddleware, async (req: any, res) => { // ???
   }
 });
 
-router.get('/', AuthMiddleware, async (req: any, res) => { // ???
+router.get('/', AuthMiddleware, async (req: any, res) => {
   try {
     const links = await LinkModel.find({ owner: req.user.userId });
     return res.json(links);
