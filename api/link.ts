@@ -1,8 +1,8 @@
 import config from 'config';
-import shortid from 'shortid';
 import { Router } from 'express';
 import { LinkModel } from '../models/Link';
 import { AuthMiddleware } from '../middleware/auth.middleware';
+import { generateSentence } from '../utils/generateId';
 
 const router = Router();
 
@@ -11,7 +11,7 @@ router.post('/generate', AuthMiddleware, async (req: any, res) => {
     const baseUrl = config.get('baseURL');
     const { from, clicksLeft } = req.body;
 
-    const code = shortid.generate();
+    const code = (await generateSentence(11, 5) + Math.floor(Math.random() * 100));
     const to = `${baseUrl}/t/${code}`;
 
     const link = new LinkModel({
