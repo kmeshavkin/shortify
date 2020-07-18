@@ -26,7 +26,7 @@ router.post(
       const user = await UserModel.findOne({ username });
       if (!user) return res.status(400).json({ message: 'Username not found' });
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      const isMatch = bcrypt.compareSync(password, user.password);
       if (!isMatch) {
         return res.status(400).json({ message: 'Incorrect password' });
       }

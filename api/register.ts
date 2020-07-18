@@ -26,7 +26,7 @@ router.post(
       const candidate = await UserModel.findOne({ username });
       if (candidate) return res.status(400).json({ message: 'Username already exists' });
 
-      const hashedPassword = await bcrypt.hash(password, config.get('salt'));
+      const hashedPassword = await bcrypt.hash(password, bcrypt.genSaltSync());
       const user = new UserModel({ username, password: hashedPassword });
       await user.save();
 
