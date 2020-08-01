@@ -8,13 +8,13 @@ import styles from './App.module.scss';
 
 function App() {
   const {
-    isLogged, login, logout,
+    isLogged, register, login, logout, loading, error, clearError,
   } = useAuth();
   const routes = useRoutes(isLogged);
 
   return (
     <AuthContext.Provider value={{
-      login, logout, isLogged,
+      register, login, logout, isLogged, loading, error, clearError,
     }}
     >
       <BrowserRouter>

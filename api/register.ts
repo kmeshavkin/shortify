@@ -29,7 +29,7 @@ router.post(
       const user = new UserModel({ username, password: hashedPassword });
       await user.save();
 
-      return res.status(201).json({ message: 'User created' });
+      return res.status(201).json({ done: true });
     } catch (error) {
       return res.status(500).json({ message: 'Something went wrong' });
     }

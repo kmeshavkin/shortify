@@ -1,13 +1,26 @@
 import { createContext } from 'react';
 
+export interface IForm {
+  username: string,
+  password: string
+}
+
 export interface IAuthContext {
   isLogged: boolean;
-  login: () => void;
-  logout: () => void;
+  register: (cred: IForm) => Promise<void>;
+  login: (cred: IForm) => Promise<void>;
+  logout: () => Promise<void>;
+  loading: boolean;
+  error: string | null;
+  clearError: () => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   isLogged: false,
-  login() { },
-  logout() { },
+  register: async () => { },
+  login: async () => { },
+  logout: async () => { },
+  loading: false,
+  error: null,
+  clearError: () => { },
 });

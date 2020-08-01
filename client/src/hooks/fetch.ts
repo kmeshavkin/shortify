@@ -16,6 +16,7 @@ export const useFetch = () => {
       });
       const data = await response.json();
 
+      // TODO: message shows overall error, but for register it should be destructured
       if (!response.ok) throw new Error(data.message || 'Something went wrong');
 
       setLoading(false);

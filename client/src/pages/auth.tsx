@@ -3,19 +3,12 @@ import {
   Button, InputGroup, Label, Toaster,
 } from '@blueprintjs/core';
 import styles from './auth.module.scss';
-import { useFetch } from '../hooks/fetch';
-import { AuthContext } from '../context/AuthContext';
-
-interface IForm {
-  username: string,
-  password: string
-}
+import { AuthContext, IForm } from '../context/AuthContext';
 
 export const AuthPage = (): JSX.Element => {
-  const { login } = useContext(AuthContext);
   const {
-    loading, error, clearError, doFetch,
-  } = useFetch();
+    login, register, loading, error, clearError,
+  } = useContext(AuthContext);
   const [form, setForm] = useState<IForm>({ username: '', password: '' });
   const [toasterRef, setToasterRef] = useState<Toaster | null>();
 
@@ -32,13 +25,12 @@ export const AuthPage = (): JSX.Element => {
 
   const registerHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    await doFetch('api/register', 'POST', { ...form });
+    register({ ...form });
   };
 
   const loginHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    const data = await doFetch('api/login', 'POST', { ...form });
-    if (data && data.done) login();
+    login({ ...form });
   };
 
   return (
