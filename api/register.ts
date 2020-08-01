@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { Router } from 'express';
 import { check, validationResult } from 'express-validator';
-import config from 'config';
 import { UserModel } from '../models/User';
 
 const router = Router();
