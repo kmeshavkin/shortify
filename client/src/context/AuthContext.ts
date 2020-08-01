@@ -1,7 +1,12 @@
 import { createContext } from 'react';
-import { IUseAuth } from '../hooks/auth';
 
-export const AuthContext = createContext<IUseAuth>({
+export interface IAuthContext {
+  isLogged: boolean;
+  login: () => void;
+  logout: () => void;
+}
+
+export const AuthContext = createContext<IAuthContext>({
   isLogged: false,
   login() { },
   logout() { },

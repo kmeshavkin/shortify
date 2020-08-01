@@ -1,12 +1,7 @@
 import { useState, useCallback } from 'react';
+import { IAuthContext } from '../context/AuthContext';
 
-export interface IUseAuth {
-  isLogged: boolean;
-  login: () => void;
-  logout: () => void;
-}
-
-export const useAuth = (): IUseAuth => {
+export const useAuth = (): IAuthContext => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
   const login = useCallback(() => {
