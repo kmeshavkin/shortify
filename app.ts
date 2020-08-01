@@ -18,8 +18,7 @@ app.use(session({
   resave: true,
   cookie: { maxAge: 3600000, sameSite: true },
 }));
-// TODO: should be also 'secure: true' (only for production)
-// TODO: also should be https only (!!!http-only option is for server side cookies!!!)
+// TODO: should be also 'secure: true' (production only, read here: https://github.com/expressjs/session#cookiesecure)
 // TODO: also don't forget mongo store for production
 app.use('/api', loginRouter);
 app.use('/api', logoutRouter);
