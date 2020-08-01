@@ -15,7 +15,7 @@ app.use(session({
   secret: config.get('sessionSecret'), // TODO: hide
   saveUninitialized: false,
   resave: true,
-  cookie: { maxAge: 3600000 },
+  cookie: { maxAge: 3600000, sameSite: true },
 }));
 // TODO: should be also 'secure: true' (only for production)
 // TODO: also should be https only (!!!http-only option is for server side cookies!!!)
