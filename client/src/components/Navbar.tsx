@@ -2,12 +2,15 @@ import React, { useContext } from 'react';
 import { Navbar as BPNavbar, Button } from '@blueprintjs/core';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { useFetch } from '../hooks/fetch';
 
 export const Navbar = () => {
-  const auth = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+  const { doFetch } = useFetch();
 
-  const logoutHandler = () => {
-    auth.logout();
+  const logoutHandler = async () => {
+    await doFetch('api/logout', 'POST');
+    logout(); // TODO: if this is commented, user still can navigate frontend, though no api methods work
   };
 
   return (

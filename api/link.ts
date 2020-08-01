@@ -18,7 +18,7 @@ router.post('/generate', AuthMiddleware, async (req: any, res) => {
       code,
       to,
       from,
-      owner: req.user.userId,
+      owner: req.session.userId,
       clicksLeft,
     });
     await link.save();
@@ -30,7 +30,7 @@ router.post('/generate', AuthMiddleware, async (req: any, res) => {
 
 router.get('/', AuthMiddleware, async (req: any, res) => {
   try {
-    const links = await LinkModel.find({ owner: req.user.userId });
+    const links = await LinkModel.find({ owner: req.session.userId });
     return res.json(links);
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong' });
@@ -49,7 +49,7 @@ router.post('/:id', AuthMiddleware, async (req, res) => {
 router.post('/delete/:id', AuthMiddleware, async (req: any, res) => {
   try {
     await LinkModel.deleteOne({ _id: req.params.id });
-    const links = await LinkModel.find({ owner: req.user.userId });
+    const links = await LinkModel.find({ owner: req.session.userId });
     return res.json(links);
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong' });

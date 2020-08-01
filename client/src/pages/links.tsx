@@ -1,29 +1,21 @@
-import React, {
-  useState, useCallback, useContext, useEffect,
-} from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Spinner, Button } from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
-import { AuthContext } from '../context/AuthContext';
 import { ILink } from '../../../models/Link';
 
 export const LinksPage = () => {
   const [links, setLinks] = useState<ILink[]>([]);
   const { doFetch, loading } = useFetch();
-  const { token } = useContext(AuthContext);
 
   const fetchLinks = useCallback(async () => {
-    const fetched = await doFetch('/api/link', 'GET', null, {
-      authorization: `Bearer ${token}`,
-    });
+    const fetched = await doFetch('/api/link', 'GET');
     setLinks(fetched);
-  }, [token, doFetch]);
+  }, [doFetch]);
 
   const deleteLink = useCallback(async (id) => {
-    const fetched = await doFetch(`/api/link/delete/${id}`, 'POST', null, {
-      authorization: `Bearer ${token}`,
-    });
+    const fetched = await doFetch(`/api/link/delete/${id}`, 'POST');
     setLinks(fetched);
-  }, [token, doFetch]);
+  }, [doFetch]);
 
   useEffect(() => {
     fetchLinks();

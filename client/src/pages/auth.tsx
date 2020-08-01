@@ -12,7 +12,7 @@ interface IForm {
 }
 
 export const AuthPage = (): JSX.Element => {
-  const auth = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const {
     loading, error, clearError, doFetch,
   } = useFetch();
@@ -38,7 +38,7 @@ export const AuthPage = (): JSX.Element => {
   const loginHandler = async () => {
     if (toasterRef) toasterRef.clear();
     const data = await doFetch('api/login', 'POST', { ...form });
-    if (data) auth.login(data.token, data.userId);
+    if (data && data.done) login();
   };
 
   return (

@@ -14,9 +14,9 @@ export const ShortifyPage = () => {
   const [clicksAmount, setClicksAmount] = useState<number>(-1);
 
   const pressHandler = async () => {
-    const data = await doFetch('/api/link/generate', 'POST', { from: link, clicksLeft: clicksAmount }, { authorization: `Bearer ${auth.token}` });
+    const data = await doFetch('/api/link/generate', 'POST', { from: link, clicksLeft: clicksAmount });
     if (data) setShortLinkData(data.link);
-    // history.push(`/detail/${data.link._id}`); // Redirect to details page, unnecessary for now
+    // history.push(`/detail/${data.link._id}`); // TODO: Redirect to details page, unnecessary for now
   };
 
   const changeClicksHandler = (e: any) => {

@@ -4,8 +4,8 @@ import { LinksPage } from './pages/links';
 import { ShortifyPage } from './pages/shortify';
 import { AuthPage } from './pages/auth';
 
-export const useRoutes = (isAuthenticated: boolean) => {
-  if (isAuthenticated) {
+export const useRoutes = (isLogged: boolean) => {
+  if (isLogged) {
     return (
       <Switch>
         <Route path="/links" exact>

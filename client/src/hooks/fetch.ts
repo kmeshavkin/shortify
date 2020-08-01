@@ -23,7 +23,6 @@ export const useFetch = () => {
     } catch (e) {
       setLoading(false);
       setError(e.message);
-      // throw e;
     }
   }, []);
 
