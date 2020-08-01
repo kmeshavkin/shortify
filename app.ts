@@ -7,6 +7,7 @@ import { logoutRouter } from './api/logout';
 import { registerRouter } from './api/register';
 import { linkRouter } from './api/link';
 import { redirectRouter } from './api/redirect';
+import { sessionRouter } from './api/session';
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use(session({
 app.use('/api', loginRouter);
 app.use('/api', logoutRouter);
 app.use('/api', registerRouter);
+app.use('/api', sessionRouter);
 app.use('/api/link', linkRouter);
 app.use('/t', redirectRouter);
 

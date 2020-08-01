@@ -11,6 +11,7 @@ export interface IAuthContext {
   login: (cred: IForm) => Promise<void>;
   logout: () => Promise<void>;
   loading: boolean;
+  sessionLoading: boolean;
   error: string | null;
   clearError: () => void;
 }
@@ -21,6 +22,7 @@ export const AuthContext = createContext<IAuthContext>({
   login: async () => { },
   logout: async () => { },
   loading: false,
+  sessionLoading: false,
   error: null,
   clearError: () => { },
 });

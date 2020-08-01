@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { IAuthContext } from '../context/AuthContext';
 import { useFetch } from './fetch';
 
@@ -8,6 +8,7 @@ export const useAuth = (): IAuthContext => {
   } = useFetch();
 
   const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [sessionLoading, setSessionLoading] = useState<boolean>(true);
 
   const register = useCallback(async (cred) => {
     const data = await doFetch('api/register', 'POST', cred);
@@ -24,7 +25,14 @@ export const useAuth = (): IAuthContext => {
     if (data?.done) setIsLogged(false);
   }, []);
 
+  useEffect(() => {
+    doFetch('api/session', 'POST').then((data: any) => {
+      if (data?.loggedIn) setIsLogged(true);
+      setSessionLoading(false);
+    });
+  }, []);
+
   return {
-    isLogged, register, login, logout, loading, error, clearError,
+    isLogged, register, login, logout, loading, sessionLoading, error, clearError,
   };
 };
