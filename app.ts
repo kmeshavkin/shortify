@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import connectMongo from 'connect-mongo';
 import config from 'config';
 import session from 'express-session';
 import { loginRouter } from './api/login';
@@ -9,6 +10,7 @@ import { linkRouter } from './api/link';
 import { redirectRouter } from './api/redirect';
 import { sessionRouter } from './api/session';
 
+const MongoStore = connectMongo(session);
 const app = express();
 app.use(express.json());
 app.use(session({
@@ -16,10 +18,10 @@ app.use(session({
   secret: config.get('sessionSecret'), // TODO: hide
   saveUninitialized: false,
   resave: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { maxAge: 3600000, sameSite: true },
 }));
 // TODO: should be also 'secure: true' (production only, read here: https://github.com/expressjs/session#cookiesecure)
-// TODO: also don't forget mongo store for production
 app.use('/api', loginRouter);
 app.use('/api', logoutRouter);
 app.use('/api', registerRouter);
