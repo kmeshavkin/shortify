@@ -1,8 +1,8 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { LinksPage } from './pages/links';
-import { ShortifyPage } from './pages/shortify';
-import { AuthPage } from './pages/auth';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { LinksPage } from "./pages/links";
+import { ShortifyPage } from "./pages/shortify";
+import { AuthPage } from "./pages/auth";
 
 export const useRoutes = (isLogged: boolean) => {
   if (isLogged) {

@@ -1,8 +1,8 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
 export interface IForm {
-  username: string,
-  password: string
+  username: string;
+  password: string;
 }
 
 export interface IAuthContext {
@@ -18,11 +18,11 @@ export interface IAuthContext {
 
 export const AuthContext = createContext<IAuthContext>({
   isLogged: false,
-  register: async () => { },
-  login: async () => { },
-  logout: async () => { },
+  register: async () => {},
+  login: async () => {},
+  logout: async () => {},
   loading: false,
   sessionLoading: false,
   error: null,
-  clearError: () => { },
+  clearError: () => {},
 });

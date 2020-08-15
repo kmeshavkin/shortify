@@ -1,4 +1,4 @@
-import { Schema, model, Types, Document } from 'mongoose';
+import { Schema, model, Types, Document } from "mongoose";
 
 export interface ILink extends Document {
   from: string;
@@ -15,7 +15,7 @@ const schema = new Schema({
   code: { type: String, required: true, unique: true },
   date: { type: Date, default: Date.now },
   clicksLeft: { type: Number, default: 0 },
-  owner: { type: Types.ObjectId, ref: 'User' },
+  owner: { type: Types.ObjectId, ref: "User" },
 });
 
-export const LinkModel = model<ILink>('Link', schema);
+export const LinkModel = model<ILink>("Link", schema);

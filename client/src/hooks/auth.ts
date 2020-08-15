@@ -1,38 +1,43 @@
-import { useState, useCallback, useEffect } from 'react';
-import { IAuthContext } from '../context/AuthContext';
-import { useFetch } from './fetch';
+import { useState, useCallback, useEffect } from "react";
+import { IAuthContext } from "../context/AuthContext";
+import { useFetch } from "./fetch";
 
 export const useAuth = (): IAuthContext => {
-  const {
-    doFetch, loading, error, clearError,
-  } = useFetch();
+  const { doFetch, loading, error, clearError } = useFetch();
 
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [sessionLoading, setSessionLoading] = useState<boolean>(true);
 
   const register = useCallback(async (cred) => {
-    const data = await doFetch('api/register', 'POST', cred);
+    const data = await doFetch("api/register", "POST", cred);
     if (data?.done) setIsLogged(true);
   }, []);
 
   const login = useCallback(async (cred) => {
-    const data = await doFetch('api/login', 'POST', cred);
+    const data = await doFetch("api/login", "POST", cred);
     if (data?.done) setIsLogged(true);
   }, []);
 
   const logout = useCallback(async () => {
-    const data = await doFetch('api/logout', 'POST');
+    const data = await doFetch("api/logout", "POST");
     if (data?.done) setIsLogged(false);
   }, []);
 
   useEffect(() => {
-    doFetch('api/session', 'POST').then((data: any) => {
+    doFetch("api/session", "POST").then((data: any) => {
       if (data?.loggedIn) setIsLogged(true);
       setSessionLoading(false);
     });
   }, []);
 
   return {
-    isLogged, register, login, logout, loading, sessionLoading, error, clearError,
+    isLogged,
+    register,
+    login,
+    logout,
+    loading,
+    sessionLoading,
+    error,
+    clearError,
   };
 };
