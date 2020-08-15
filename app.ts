@@ -3,12 +3,9 @@ import mongoose from "mongoose";
 import connectMongo from "connect-mongo";
 import config from "config";
 import session from "express-session";
-import { loginRouter } from "./api/login";
-import { logoutRouter } from "./api/logout";
-import { registerRouter } from "./api/register";
+import { authRouter } from "./api/auth";
 import { linkRouter } from "./api/link";
 import { redirectRouter } from "./api/redirect";
-import { sessionRouter } from "./api/session";
 
 const MongoStore = connectMongo(session);
 const app = express();
@@ -24,10 +21,7 @@ app.use(
   })
 );
 // TODO: should be also 'secure: true' (production only, read here: https://github.com/expressjs/session#cookiesecure)
-app.use("/api", loginRouter);
-app.use("/api", logoutRouter);
-app.use("/api", registerRouter);
-app.use("/api", sessionRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/link", linkRouter);
 app.use("/t", redirectRouter);
 
