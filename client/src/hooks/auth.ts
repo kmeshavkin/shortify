@@ -9,7 +9,7 @@ export const useAuth = (): IAuthContext => {
   const [sessionLoading, setSessionLoading] = useState<boolean>(true);
 
   const register = useCallback(async (cred) => {
-    const data = await doFetch("api/auth/register", "POST", cred);
+    const data = await doFetch("/api/auth/register", "POST", cred);
     if (data?.done) setIsLogged(true);
   }, []);
 
@@ -19,12 +19,12 @@ export const useAuth = (): IAuthContext => {
   }, []);
 
   const logout = useCallback(async () => {
-    const data = await doFetch("api/auth/logout", "POST");
+    const data = await doFetch("/api/auth/logout", "POST");
     if (data?.done) setIsLogged(false);
   }, []);
 
   useEffect(() => {
-    doFetch("api/auth/session", "POST").then((data: any) => {
+    doFetch("/api/auth/session", "POST").then((data: any) => {
       if (data?.loggedIn) setIsLogged(true);
       setSessionLoading(false);
     });

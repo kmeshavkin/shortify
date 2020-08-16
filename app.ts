@@ -20,11 +20,14 @@ app.use(
     cookie: { maxAge: 3600000, sameSite: true },
   })
 );
+
+// Routes setup
 // TODO: should be also 'secure: true' (production only, read here: https://github.com/expressjs/session#cookiesecure)
 app.use("/api/auth", authRouter);
 app.use("/api/link", linkRouter);
 app.use("/t", redirectRouter);
 
+// Mongo setup and project run point
 const PORT = config.get("port");
 
 (async function start() {
