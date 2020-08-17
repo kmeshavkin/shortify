@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { LinksPage } from "./pages/links";
 import { ShortifyPage } from "./pages/shortify";
 import { AuthPage } from "./pages/auth";
+import { ApiPage } from "./pages/api";
 
 export const useRoutes = (isLogged: boolean) => {
   if (isLogged) {
@@ -14,6 +15,9 @@ export const useRoutes = (isLogged: boolean) => {
         <Route path="/shortify" exact>
           <ShortifyPage />
         </Route>
+        <Route path="/api">
+          <ApiPage />
+        </Route>
         <Redirect to="/shortify" />
       </Switch>
     );
@@ -23,6 +27,9 @@ export const useRoutes = (isLogged: boolean) => {
     <Switch>
       <Route path="/" exact>
         <AuthPage />
+      </Route>
+      <Route path="/api">
+        <ApiPage />
       </Route>
       <Redirect to="/" />
     </Switch>
