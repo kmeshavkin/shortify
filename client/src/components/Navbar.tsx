@@ -11,7 +11,7 @@ export const Navbar = (): JSX.Element => {
   const logout = useCallback(async () => {
     const data = await doFetch('/api/auth/logout', 'POST');
     if (data?.done) setIsLogged(false);
-  }, []);
+  }, [doFetch, setIsLogged]);
 
   return (
     <BPNavbar className="bp3-dark">

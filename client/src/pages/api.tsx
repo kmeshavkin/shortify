@@ -6,14 +6,18 @@ import { AuthContext } from '../context/AuthContext';
 
 export const ApiPage = (): JSX.Element => {
   const location = useLocation();
-  const { doFetch, loading } = useFetch();
+  const { doFetch } = useFetch();
   const { setIsLogged } = useContext(AuthContext);
 
   const sendRequest = useCallback(async () => {
     const data = await doFetch(location.pathname + location.search, 'POST');
-    // TODO: weird code, redo
-    if (location.pathname === '/api/auth/google/redirect' && data?.done)
-      setIsLogged(true);
+    switch (location.pathname) {
+      case '/api/auth/google/redirect':
+        if (data?.done) setIsLogged(true);
+        break;
+      default:
+        return <Redirect to="/" />;
+    }
   }, [doFetch, setIsLogged, location.pathname, location.search]);
 
   // TODO: fix unmount before request finishes:
@@ -22,7 +26,5 @@ export const ApiPage = (): JSX.Element => {
     sendRequest();
   }, [sendRequest]);
 
-  if (loading) return <Spinner />;
-  // TODO: google/redirect redirects to "/" first even if successful
-  return <Redirect to="/" />;
+  return <Spinner />;
 };

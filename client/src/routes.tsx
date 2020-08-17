@@ -15,9 +15,6 @@ export const useRoutes = (isLogged: boolean): JSX.Element => {
         <Route path="/shortify" exact>
           <ShortifyPage />
         </Route>
-        <Route path="/api">
-          <ApiPage />
-        </Route>
         <Redirect to="/shortify" />
       </Switch>
     );
