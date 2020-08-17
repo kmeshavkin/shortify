@@ -4,10 +4,7 @@ import styles from "./auth.module.scss";
 import { AuthContext, IForm } from "../context/AuthContext";
 
 export const AuthPage = (): JSX.Element => {
-  const { login, register, loading, error, clearError } = useContext(
-    AuthContext
-  );
-  const [form, setForm] = useState<IForm>({ username: "", password: "" });
+  const [form, setForm] = useState<IForm>({ email: "", password: "" });
   const [toasterRef, setToasterRef] = useState<Toaster | null>();
 
   useEffect(() => {
@@ -35,12 +32,12 @@ export const AuthPage = (): JSX.Element => {
     <div className={styles.container}>
       <h2>Auth</h2>
       <Label>
-        Username
+        Email
         <InputGroup
-          name="username"
-          type="username"
+          name="email"
+          type="email"
           autoFocus
-          value={form.username}
+          value={form.email}
           onChange={changeHandler}
         />
       </Label>

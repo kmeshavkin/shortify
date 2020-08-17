@@ -1,14 +1,14 @@
 import { Schema, model, Types, Document } from "mongoose";
 
 export interface IUser extends Document {
-  username: string;
+  email: string;
   password: string;
   links: string[];
 }
 
 const schema = new Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String },
   links: [{ type: Types.ObjectId, ref: "Link" }],
 });
 

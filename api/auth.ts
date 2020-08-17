@@ -7,7 +7,8 @@ const router = Router();
 router.post(
   "/login",
   [
-    check("username", "Username cannot be empty").exists({ checkFalsy: true }),
+    check("email", "Email cannot be empty").exists({ checkFalsy: true }),
+    check("email", "Wrong email format").isEmail(),
     check("password", "Password cannot be empty").exists({ checkFalsy: true }),
   ],
   async (req, res) => {
@@ -20,9 +21,9 @@ router.post(
         });
       }
 
-      const { username, password } = req.body;
-      const user = await UserModel.findOne({ username });
-      if (!user) return res.status(400).json({ message: "Username not found" });
+      const { email, password } = req.body;
+      const user = await UserModel.findOne({ email });
+      if (!user) return res.status(400).json({ message: "Email not found" });
 
       const isMatch = bcrypt.compareSync(password, user.password);
       if (!isMatch) {
@@ -50,7 +51,8 @@ router.post("/logout", async (req, res) => {
 router.post(
   "/register",
   [
-    check("username", "Username cannot be empty").exists({ checkFalsy: true }),
+    check("email", "Email cannot be empty").exists({ checkFalsy: true }),
+    check("email", "Wrong email format").isEmail(),
     check("password", "Password length should be at least 6").isLength({
       min: 6,
     }),
@@ -68,13 +70,13 @@ router.post(
         });
       }
 
-      const { username, password } = req.body;
-      const candidate = await UserModel.findOne({ username });
+      const { email, password } = req.body;
+      const candidate = await UserModel.findOne({ email });
       if (candidate)
-        return res.status(400).json({ message: "Username already exists" });
+        return res.status(400).json({ message: "Email already exists" });
 
       const hashedPassword = await bcrypt.hash(password, bcrypt.genSaltSync());
-      const user = new UserModel({ username, password: hashedPassword });
+      const user = new UserModel({ email, password: hashedPassword });
       await user.save();
 
       return res.status(201).json({ done: true });
