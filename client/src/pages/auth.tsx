@@ -63,6 +63,7 @@ export const AuthPage = (): JSX.Element => {
       </Label>
       <Button text="Login" disabled={loading} onClick={loginHandler} />
       <Button text="Register" disabled={loading} onClick={registerHandler} />
+      {/* TODO: Currently pressing Google button leaves all buttons enabled */}
       <AnchorButton text="Google" disabled={loading} href={googleLogin} />
       <Toaster
         position="top-right"
