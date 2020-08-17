@@ -1,9 +1,9 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { LinksPage } from "./pages/links";
-import { ShortifyPage } from "./pages/shortify";
-import { AuthPage } from "./pages/auth";
-import { ApiPage } from "./pages/api";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { LinksPage } from './pages/links';
+import { ShortifyPage } from './pages/shortify';
+import { AuthPage } from './pages/auth';
+import { ApiPage } from './pages/api';
 
 export const useRoutes = (isLogged: boolean): JSX.Element => {
   if (isLogged) {

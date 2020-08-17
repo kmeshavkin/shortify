@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useContext } from "react";
-import { useLocation, Redirect } from "react-router-dom";
-import { Spinner } from "@blueprintjs/core";
-import { useFetch } from "../hooks/fetch";
-import { AuthContext } from "../context/AuthContext";
+import React, { useCallback, useEffect, useContext } from 'react';
+import { useLocation, Redirect } from 'react-router-dom';
+import { Spinner } from '@blueprintjs/core';
+import { useFetch } from '../hooks/fetch';
+import { AuthContext } from '../context/AuthContext';
 
 export const ApiPage = (): JSX.Element => {
   const location = useLocation();
@@ -10,9 +10,9 @@ export const ApiPage = (): JSX.Element => {
   const { setIsLogged } = useContext(AuthContext);
 
   const sendRequest = useCallback(async () => {
-    const data = await doFetch(location.pathname + location.search, "POST");
+    const data = await doFetch(location.pathname + location.search, 'POST');
     // TODO: weird code, redo
-    if (location.pathname === "/api/auth/google/redirect" && data?.done)
+    if (location.pathname === '/api/auth/google/redirect' && data?.done)
       setIsLogged(true);
   }, [doFetch, setIsLogged, location.pathname, location.search]);
 

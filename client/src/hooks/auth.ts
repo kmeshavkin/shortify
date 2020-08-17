@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { IAuthContext } from "../context/AuthContext";
-import { useFetch } from "./fetch";
+import { useState, useEffect } from 'react';
+import { IAuthContext } from '../context/AuthContext';
+import { useFetch } from './fetch';
 
 export const useAuth = (): IAuthContext => {
   const { doFetch } = useFetch();
@@ -10,7 +10,7 @@ export const useAuth = (): IAuthContext => {
   const [googleLogin, setGoogleLogin] = useState<string | undefined>();
 
   useEffect(() => {
-    doFetch("/api/auth/session", "POST").then(
+    doFetch('/api/auth/session', 'POST').then(
       (data: { loggedIn: boolean; loginLink: string } | undefined) => {
         if (data) {
           setIsLogged(data.loggedIn);

@@ -1,15 +1,15 @@
-import React, { useCallback, useContext } from "react";
-import { Navbar as BPNavbar, Button } from "@blueprintjs/core";
-import { NavLink } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
-import { useFetch } from "../hooks/fetch";
+import React, { useCallback, useContext } from 'react';
+import { Navbar as BPNavbar, Button } from '@blueprintjs/core';
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { useFetch } from '../hooks/fetch';
 
 export const Navbar = (): JSX.Element => {
   const { doFetch, loading } = useFetch();
   const { setIsLogged } = useContext(AuthContext);
 
   const logout = useCallback(async () => {
-    const data = await doFetch("/api/auth/logout", "POST");
+    const data = await doFetch('/api/auth/logout', 'POST');
     if (data?.done) setIsLogged(false);
   }, []);
 

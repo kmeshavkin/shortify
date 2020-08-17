@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Button,
   InputGroup,
   Label,
   Toaster,
   AnchorButton,
-} from "@blueprintjs/core";
-import styles from "./auth.module.scss";
-import { AuthContext, IForm } from "../context/AuthContext";
-import { useFetch } from "../hooks/fetch";
+} from '@blueprintjs/core';
+import styles from './auth.module.scss';
+import { AuthContext, IForm } from '../context/AuthContext';
+import { useFetch } from '../hooks/fetch';
 
 export const AuthPage = (): JSX.Element => {
   const { doFetch, loading, error, clearError } = useFetch();
   const { setIsLogged, googleLogin } = useContext(AuthContext);
-  const [form, setForm] = useState<IForm>({ email: "", password: "" });
+  const [form, setForm] = useState<IForm>({ email: '', password: '' });
   const [toasterRef, setToasterRef] = useState<Toaster | null>();
 
   useEffect(() => {
     if (toasterRef && error) {
-      toasterRef.show({ message: error, intent: "danger" });
+      toasterRef.show({ message: error, intent: 'danger' });
       clearError();
     }
   }, [clearError, toasterRef, error]);
@@ -29,13 +29,13 @@ export const AuthPage = (): JSX.Element => {
 
   const registerHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    const data = await doFetch("/api/auth/register", "POST", { ...form });
+    const data = await doFetch('/api/auth/register', 'POST', { ...form });
     if (data?.done) setIsLogged(true);
   };
 
   const loginHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    const data = await doFetch("api/auth/login", "POST", { ...form });
+    const data = await doFetch('api/auth/login', 'POST', { ...form });
     if (data?.done) setIsLogged(true);
   };
 
