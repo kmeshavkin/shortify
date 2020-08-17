@@ -36,6 +36,7 @@ const PORT = config.get("port");
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   });
   app.listen(PORT, () => console.log(`Started on port ${PORT}`));
 })();

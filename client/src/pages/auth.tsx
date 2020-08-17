@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, InputGroup, Label, Toaster } from "@blueprintjs/core";
+import {
+  Button,
+  InputGroup,
+  Label,
+  Toaster,
+  AnchorButton,
+} from "@blueprintjs/core";
 import styles from "./auth.module.scss";
 import { AuthContext, IForm } from "../context/AuthContext";
+import { useFetch } from "../hooks/fetch";
 
 export const AuthPage = (): JSX.Element => {
+  const { doFetch, loading, error, clearError } = useFetch();
+  const { setIsLogged, googleLogin } = useContext(AuthContext);
   const [form, setForm] = useState<IForm>({ email: "", password: "" });
   const [toasterRef, setToasterRef] = useState<Toaster | null>();
 
@@ -20,12 +29,14 @@ export const AuthPage = (): JSX.Element => {
 
   const registerHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    register({ ...form });
+    const data = await doFetch("/api/auth/register", "POST", { ...form });
+    if (data?.done) setIsLogged(true);
   };
 
   const loginHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    login({ ...form });
+    const data = await doFetch("api/auth/login", "POST", { ...form });
+    if (data?.done) setIsLogged(true);
   };
 
   return (
@@ -52,6 +63,7 @@ export const AuthPage = (): JSX.Element => {
       </Label>
       <Button text="Login" disabled={loading} onClick={loginHandler} />
       <Button text="Register" disabled={loading} onClick={registerHandler} />
+      <AnchorButton text="Google" disabled={loading} href={googleLogin} />
       <Toaster
         position="top-right"
         maxToasts={1}

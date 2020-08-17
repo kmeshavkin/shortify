@@ -7,22 +7,13 @@ export interface IForm {
 
 export interface IAuthContext {
   isLogged: boolean;
-  register: (cred: IForm) => Promise<void>;
-  login: (cred: IForm) => Promise<void>;
-  logout: () => Promise<void>;
-  loading: boolean;
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
   sessionLoading: boolean;
-  error: string | null;
-  clearError: () => void;
+  googleLogin?: string;
 }
 
 export const AuthContext = createContext<IAuthContext>({
   isLogged: false,
-  register: async () => {},
-  login: async () => {},
-  logout: async () => {},
-  loading: false,
+  setIsLogged: () => undefined,
   sessionLoading: false,
-  error: null,
-  clearError: () => {},
 });

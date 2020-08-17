@@ -28,6 +28,7 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.5.0",
     "fakelish": "^0.3.0",
+    "googleapis": "^59.0.0",
     "mongoose": "^5.9.18",
     "node-sass": "^4.14.1"
   },

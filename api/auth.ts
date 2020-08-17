@@ -1,7 +1,13 @@
 import bcrypt from "bcryptjs";
+import config from "config";
 import { Router } from "express";
 import { validationResult, check } from "express-validator";
+import { google } from "googleapis";
 import { UserModel } from "../models/User";
+
+const { OAuth2 } = google.auth;
+const { clientID, clientSecret, redirectURLs, scope } = config.get("google");
+const oauth2Client = new OAuth2(clientID, clientSecret, redirectURLs);
 
 const router = Router();
 router.post(
@@ -33,17 +39,48 @@ router.post(
       // TODO: use req.session.regenerate(() => { ... }); here?
       req.session.userId = user.id;
 
-      return res.json({ done: true }); // TODO: needs .json() response for some reason?
+      return res.json({ done: true });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ message: "Something went wrong" });
     }
   }
 );
 
+router.post("/google/redirect", async (req, res) => {
+  try {
+    const { code, error } = req.query;
+    if (error) throw new Error(error.toString());
+
+    const { tokens } = await oauth2Client.getToken(code.toString());
+    oauth2Client.setCredentials(tokens);
+    const people = google.people({ version: "v1", auth: oauth2Client });
+    const { data } = await people.people.get({
+      resourceName: "people/me",
+      personFields: "emailAddresses,externalIds",
+    });
+
+    const externalId = data.etag;
+    const email = data.emailAddresses[0].value;
+
+    const candidate = await UserModel.findOneAndUpdate(
+      { $or: [{ googleId: externalId }, { email }] },
+      { email, password: "", googleId: externalId }, // TODO: make so it doesn't replace existing password
+      { upsert: true, new: true }
+    );
+    req.session.userId = candidate.id;
+    return res.json({ done: true });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
 router.post("/logout", async (req, res) => {
   try {
     return req.session.destroy(() => res.json({ done: true })); // TODO: Check if I need to delete cookie myself
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: "Something went wrong" });
   }
 });
@@ -81,6 +118,7 @@ router.post(
 
       return res.status(201).json({ done: true });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ message: "Something went wrong" });
     }
   }
@@ -88,11 +126,14 @@ router.post(
 
 router.post("/session", async (req, res) => {
   try {
-    if (req.session.userId) return res.json({ loggedIn: true });
+    const loginLink = oauth2Client.generateAuthUrl({
+      access_type: "offline",
+      scope,
+    });
+    return res.json({ loginLink, loggedIn: req.session.userId });
   } catch (e) {
     return res.json({ loggedIn: false });
   }
-  return res.json({ loggedIn: false });
 });
 
 export const authRouter = router;
