@@ -3,7 +3,7 @@ import { Spinner, Button } from "@blueprintjs/core";
 import { useFetch } from "../hooks/fetch";
 import { ILink } from "../../../models/Link";
 
-export const LinksPage = () => {
+export const LinksPage = (): JSX.Element => {
   const [links, setLinks] = useState<ILink[]>([]);
   const { doFetch, loading } = useFetch();
 

@@ -10,11 +10,15 @@ export const useAuth = (): IAuthContext => {
   const [googleLogin, setGoogleLogin] = useState<string | undefined>();
 
   useEffect(() => {
-    doFetch("/api/auth/session", "POST").then((data: any) => {
-      setIsLogged(data?.loggedIn);
-      setGoogleLogin(data?.loginLink);
-      setSessionLoading(false);
-    });
+    doFetch("/api/auth/session", "POST").then(
+      (data: { loggedIn: boolean; loginLink: string } | undefined) => {
+        if (data) {
+          setIsLogged(data.loggedIn);
+          setGoogleLogin(data.loginLink);
+        }
+        setSessionLoading(false);
+      }
+    );
   }, [doFetch]);
 
   return { isLogged, setIsLogged, sessionLoading, googleLogin };

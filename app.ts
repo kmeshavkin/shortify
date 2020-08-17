@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(
   session({
     name: config.get("sessionName"),
-    secret: config.get("sessionSecret"), // TODO: hide
+    secret: config.get("sessionSecret"),
     saveUninitialized: false,
     resave: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -32,7 +32,6 @@ const PORT = config.get("port");
 
 (async function start() {
   await mongoose.connect(config.get("mongoURL"), {
-    // TODO: hide
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

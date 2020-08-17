@@ -1,4 +1,4 @@
-export const AuthMiddleware = (req, res, next) => {
+export const AuthMiddleware = (req, res, next): void => {
   if (req.method === "OPTIONS") {
     return next();
   }

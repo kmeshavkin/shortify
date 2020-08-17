@@ -7,7 +7,7 @@ import { AuthContext } from "./context/AuthContext";
 import { Navbar } from "./components/Navbar";
 import styles from "./App.module.scss";
 
-function App() {
+function App(): JSX.Element {
   const auth = useAuth();
   const routes = useRoutes(auth.isLogged);
 

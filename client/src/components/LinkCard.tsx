@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "@blueprintjs/core";
 import { ILink } from "../../../models/Link";
 
-export const LinkCard = (link: ILink) => (
+export const LinkCard = (link: ILink): JSX.Element => (
   <Card>
     <p>Full link: {link.from}</p>
     <p>Short link: {link.to}</p>

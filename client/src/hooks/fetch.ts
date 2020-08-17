@@ -5,9 +5,16 @@ type requestFunc = (
   method?: RequestInit["method"],
   body?: any,
   headers?: Record<string, string>
-) => any;
+) => any; // TODO: fix any?
 
-export const useFetch = () => {
+export interface IUseFetch {
+  loading: boolean;
+  error: null | string;
+  doFetch: requestFunc;
+  clearError: () => void;
+}
+
+export const useFetch = (): IUseFetch => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
 
@@ -33,6 +40,7 @@ export const useFetch = () => {
       } catch (e) {
         setLoading(false);
         setError(e.message);
+        return null;
       }
     },
     []

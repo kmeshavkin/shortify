@@ -5,7 +5,7 @@ import { ShortifyPage } from "./pages/shortify";
 import { AuthPage } from "./pages/auth";
 import { ApiPage } from "./pages/api";
 
-export const useRoutes = (isLogged: boolean) => {
+export const useRoutes = (isLogged: boolean): JSX.Element => {
   if (isLogged) {
     return (
       <Switch>

@@ -4,7 +4,7 @@ import { Spinner } from "@blueprintjs/core";
 import { useFetch } from "../hooks/fetch";
 import { AuthContext } from "../context/AuthContext";
 
-export const ApiPage = () => {
+export const ApiPage = (): JSX.Element => {
   const location = useLocation();
   const { doFetch, loading } = useFetch();
   const { setIsLogged } = useContext(AuthContext);
@@ -16,7 +16,8 @@ export const ApiPage = () => {
       setIsLogged(true);
   }, [doFetch, setIsLogged, location.pathname, location.search]);
 
-  // TODO: fix unmount before request finishes: "To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function"
+  // TODO: fix unmount before request finishes:
+  // "To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function"
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);

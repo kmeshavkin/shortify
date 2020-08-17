@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useFetch } from "../hooks/fetch";
 
-export const Navbar = () => {
+export const Navbar = (): JSX.Element => {
   const { doFetch, loading } = useFetch();
   const { setIsLogged } = useContext(AuthContext);
 
