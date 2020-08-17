@@ -8,35 +8,15 @@ import { Navbar } from "./components/Navbar";
 import styles from "./App.module.scss";
 
 function App() {
-  const {
-    isLogged,
-    register,
-    login,
-    logout,
-    loading,
-    sessionLoading,
-    error,
-    clearError,
-  } = useAuth();
-  const routes = useRoutes(isLogged);
+  const auth = useAuth();
+  const routes = useRoutes(auth.isLogged);
 
-  if (sessionLoading) return <Spinner />;
+  if (auth.sessionLoading) return <Spinner />;
 
   return (
-    <AuthContext.Provider
-      value={{
-        register,
-        login,
-        logout,
-        isLogged,
-        loading,
-        sessionLoading,
-        error,
-        clearError,
-      }}
-    >
+    <AuthContext.Provider value={auth}>
       <BrowserRouter>
-        {isLogged && <Navbar />}
+        {auth.isLogged && <Navbar />}
         <div className={styles.container}>{routes}</div>
       </BrowserRouter>
     </AuthContext.Provider>

@@ -15,7 +15,7 @@ export const AuthPage = (): JSX.Element => {
       toasterRef.show({ message: error, intent: "danger" });
       clearError();
     }
-  }, [error]);
+  }, [clearError, toasterRef, error]);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [event.target.name]: event.target.value });

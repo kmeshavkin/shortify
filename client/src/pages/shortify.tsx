@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { InputGroup, Button } from "@blueprintjs/core";
 import { useFetch } from "../hooks/fetch";
-import { AuthContext } from "../context/AuthContext";
 import { ILink } from "../../../models/Link";
 import { LinkCard } from "../components/LinkCard";
 
 export const ShortifyPage = () => {
-  const auth = useContext(AuthContext);
   // const history = useHistory();
   const { doFetch } = useFetch();
   const [link, setLink] = useState("");
