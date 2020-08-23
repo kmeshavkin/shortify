@@ -14,8 +14,8 @@ app.use(
   session({
     name: config.get('sessionName'),
     secret: config.get('sessionSecret'),
-    saveUninitialized: false,
     resave: true,
+    saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { maxAge: 3600000, sameSite: true },
   })
@@ -37,5 +37,10 @@ const PORT = config.get('port');
     useCreateIndex: true,
     useFindAndModify: false,
   });
+
+  // TODO: Somehow access sessions schema and add hook to remove all links linked to expired session
+  // mongoose.model('sessions').collection.watch().stream().on('data', (data) => {
+  //     console.log(data.operationType);
+  // });
   app.listen(PORT, () => console.log(`Started on port ${PORT}`));
 })();

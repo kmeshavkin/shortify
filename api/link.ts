@@ -1,12 +1,11 @@
 import config from 'config';
 import { Router } from 'express';
 import { LinkModel } from '../models/Link';
-import { AuthMiddleware } from '../middleware/auth.middleware';
 import { generateSentence } from '../utils/generateId';
 
 const router = Router();
 
-router.post('/generate', AuthMiddleware, async (req, res) => {
+router.post('/generate', async (req, res) => {
   try {
     const baseUrl = config.get('baseURL');
     const { from, clicksLeft } = req.body;
@@ -19,7 +18,7 @@ router.post('/generate', AuthMiddleware, async (req, res) => {
       code,
       to,
       from,
-      owner: req.session.userId,
+      owner: req.session.userId || req.session.id,
       clicksLeft,
     });
     await link.save();
@@ -29,16 +28,19 @@ router.post('/generate', AuthMiddleware, async (req, res) => {
   }
 });
 
-router.get('/', AuthMiddleware, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const links = await LinkModel.find({ owner: req.session.userId });
+    const links = await LinkModel.find({
+      owner: req.session.userId || req.session.id,
+    });
     return res.json(links);
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong' });
   }
 });
 
-router.post('/:id', AuthMiddleware, async (req, res) => {
+// Unused currently
+router.post('/:id', async (req, res) => {
   try {
     const link = await LinkModel.findById(req.params.id);
     return res.json(link);
@@ -47,10 +49,12 @@ router.post('/:id', AuthMiddleware, async (req, res) => {
   }
 });
 
-router.post('/delete/:id', AuthMiddleware, async (req, res) => {
+router.post('/delete/:id', async (req, res) => {
   try {
     await LinkModel.deleteOne({ _id: req.params.id });
-    const links = await LinkModel.find({ owner: req.session.userId });
+    const links = await LinkModel.find({
+      owner: req.session.userId || req.session.id,
+    });
     return res.json(links);
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong' });

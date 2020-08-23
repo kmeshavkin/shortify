@@ -8,7 +8,7 @@ router.get('/:code', async (req, res) => {
     const link = await LinkModel.findOne({ code: req.params.code });
     if (!link) return res.status(404).json('Link not found');
     if (link.clicksLeft === 0) {
-      return res.status(500).json('No link clicks left');
+      return res.status(500).json('No link clicks left'); // TODO: Delete if 0 left?
     }
 
     if (link.clicksLeft > 0) {

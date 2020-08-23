@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { validationResult, check } from 'express-validator';
 import { google } from 'googleapis';
 import { UserModel } from '../models/User';
+import { AfterAuthMiddleware } from '../middleware/auth.middleware';
 
 const { OAuth2 } = google.auth;
 const { clientID, clientSecret, redirectURLs, scope } = config.get('google');
@@ -17,7 +18,7 @@ router.post(
     check('email', 'Wrong email format').isEmail(),
     check('password', 'Password cannot be empty').exists({ checkFalsy: true }),
   ],
-  async (req, res) => {
+  async (req, res, next) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -39,42 +40,49 @@ router.post(
       // TODO: use req.session.regenerate(() => { ... }); here?
       req.session.userId = user.id;
 
-      return res.json({ done: true });
+      res.json({ done: true });
+      return next();
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: 'Something went wrong' });
     }
-  }
+  },
+  AfterAuthMiddleware
 );
 
-router.post('/google/redirect', async (req, res) => {
-  try {
-    const { code, error } = req.query;
-    if (error) throw new Error(error.toString());
+router.post(
+  '/google/redirect',
+  async (req, res, next) => {
+    try {
+      const { code, error } = req.query;
+      if (error) throw new Error(error.toString());
 
-    const { tokens } = await oauth2Client.getToken(code.toString());
-    oauth2Client.setCredentials(tokens);
-    const people = google.people({ version: 'v1', auth: oauth2Client });
-    const { data } = await people.people.get({
-      resourceName: 'people/me',
-      personFields: 'emailAddresses,externalIds',
-    });
+      const { tokens } = await oauth2Client.getToken(code.toString());
+      oauth2Client.setCredentials(tokens);
+      const people = google.people({ version: 'v1', auth: oauth2Client });
+      const { data } = await people.people.get({
+        resourceName: 'people/me',
+        personFields: 'emailAddresses,externalIds',
+      });
 
-    const externalId = data.etag;
-    const email = data.emailAddresses[0].value;
+      const externalId = data.etag;
+      const email = data.emailAddresses[0].value;
 
-    const candidate = await UserModel.findOneAndUpdate(
-      { $or: [{ googleId: externalId }, { email }] },
-      { email, password: '', googleId: externalId }, // TODO: make so it doesn't replace existing password
-      { upsert: true, new: true }
-    );
-    req.session.userId = candidate.id;
-    return res.json({ done: true });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: 'Something went wrong' });
-  }
-});
+      const candidate = await UserModel.findOneAndUpdate(
+        { $or: [{ googleId: externalId }, { email }] },
+        { email, password: '', googleId: externalId }, // TODO: make so it doesn't replace existing password
+        { upsert: true, new: true }
+      );
+      req.session.userId = candidate.id;
+      res.json({ done: true });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: 'Something went wrong' });
+    }
+    return next();
+  },
+  AfterAuthMiddleware
+);
 
 router.post('/logout', async (req, res) => {
   try {
@@ -109,8 +117,9 @@ router.post(
 
       const { email, password } = req.body;
       const candidate = await UserModel.findOne({ email });
-      if (candidate)
+      if (candidate) {
         return res.status(400).json({ message: 'Email already exists' });
+      }
 
       const hashedPassword = await bcrypt.hash(password, bcrypt.genSaltSync());
       const user = new UserModel({ email, password: hashedPassword });

@@ -16,7 +16,7 @@ function App(): JSX.Element {
   return (
     <AuthContext.Provider value={auth}>
       <BrowserRouter>
-        {auth.isLogged && <Navbar />}
+        <Navbar />
         <div className={styles.container}>{routes}</div>
       </BrowserRouter>
     </AuthContext.Provider>

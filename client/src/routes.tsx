@@ -6,28 +6,24 @@ import { AuthPage } from './pages/auth';
 import { ApiPage } from './pages/api';
 
 export const useRoutes = (isLogged: boolean): JSX.Element => {
-  if (isLogged) {
-    return (
-      <Switch>
-        <Route path="/links" exact>
-          <LinksPage />
-        </Route>
-        <Route path="/shortify" exact>
-          <ShortifyPage />
-        </Route>
-        <Redirect to="/shortify" />
-      </Switch>
-    );
-  }
-
   return (
     <Switch>
       <Route path="/" exact>
-        <AuthPage />
+        <ShortifyPage />
       </Route>
-      <Route path="/api">
-        <ApiPage />
+      <Route path="/links" exact>
+        <LinksPage />
       </Route>
+      {!isLogged && (
+        <>
+          <Route path="/login" exact>
+            <AuthPage />
+          </Route>
+          <Route path="/api">
+            <ApiPage />
+          </Route>
+        </>
+      )}
       <Redirect to="/" />
     </Switch>
   );

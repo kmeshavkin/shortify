@@ -1,16 +1,20 @@
 import React, { useCallback, useContext } from 'react';
 import { Navbar as BPNavbar, Button } from '@blueprintjs/core';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useFetch } from '../hooks/fetch';
 
 export const Navbar = (): JSX.Element => {
+  const history = useHistory();
   const { doFetch, loading } = useFetch();
-  const { setIsLogged } = useContext(AuthContext);
+  const { isLogged, setIsLogged } = useContext(AuthContext);
 
   const logout = useCallback(async () => {
     const data = await doFetch('/api/auth/logout', 'POST');
-    if (data?.done) setIsLogged(false);
+    if (data?.done) {
+      setIsLogged(false);
+      history.push('/');
+    }
   }, [doFetch, setIsLogged]);
 
   return (
@@ -18,19 +22,26 @@ export const Navbar = (): JSX.Element => {
       <BPNavbar.Group align="left">
         <BPNavbar.Heading>Shortify</BPNavbar.Heading>
         <BPNavbar.Divider />
-        <NavLink to="/shortify">
+        <NavLink to="/">
           <Button minimal text="Shortify" />
         </NavLink>
         <NavLink to="/links">
           <Button minimal text="Links" />
         </NavLink>
         <BPNavbar.Divider />
-        <Button
-          disabled={loading}
-          onClick={logout}
-          intent="danger"
-          icon="log-out"
-        />
+        {!isLogged && (
+          <NavLink to="/login">
+            <Button icon="log-in" intent="success" text="Login" />
+          </NavLink>
+        )}
+        {isLogged && (
+          <Button
+            disabled={loading}
+            onClick={logout}
+            intent="danger"
+            icon="log-out"
+          />
+        )}
       </BPNavbar.Group>
     </BPNavbar>
   );

@@ -29,8 +29,7 @@ export const AuthPage = (): JSX.Element => {
 
   const registerHandler = async () => {
     if (toasterRef) toasterRef.clear();
-    const data = await doFetch('/api/auth/register', 'POST', { ...form });
-    if (data?.done) setIsLogged(true);
+    await doFetch('/api/auth/register', 'POST', { ...form });
   };
 
   const loginHandler = async () => {
