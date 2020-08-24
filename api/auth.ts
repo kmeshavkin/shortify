@@ -37,7 +37,7 @@ router.post(
         return res.status(400).json({ message: 'Incorrect password' });
       }
 
-      // TODO: use req.session.regenerate(() => { ... }); here?
+      // Don't use req.session.regenerate here, I need session after login to save links
       req.session.userId = user.id;
 
       res.json({ done: true });
@@ -86,7 +86,8 @@ router.post(
 
 router.post('/logout', async (req, res) => {
   try {
-    return req.session.destroy(() => res.json({ done: true })); // TODO: Check if I need to delete cookie myself
+    // Destroying session is not necessary, just in case
+    return req.session.destroy(() => res.json({ done: true }));
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: 'Something went wrong' });

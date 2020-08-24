@@ -5,7 +5,7 @@ type requestFunc = (
   method?: RequestInit['method'],
   body?: any,
   headers?: Record<string, string>
-) => any; // TODO: fix any?
+) => Promise<any>;
 
 export interface IUseFetch {
   loading: boolean;
