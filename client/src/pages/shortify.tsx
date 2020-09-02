@@ -21,10 +21,9 @@ export const ShortifyPage = (): JSX.Element => {
   const changeClicksHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    if (e.target.value === '') return setClicksAmount(-1);
-
     const parsedNumber = Math.abs(Number(e.target.value));
-    if (Number.isNaN(parsedNumber) || parsedNumber > 999999999)
+    if (parsedNumber === 0) return setClicksAmount(-1);
+    if (Number.isNaN(parsedNumber) || parsedNumber > Number.MAX_SAFE_INTEGER)
       return setClicksAmount(clicksAmount);
     return setClicksAmount(parsedNumber);
   };
