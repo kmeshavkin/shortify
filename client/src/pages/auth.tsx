@@ -1,14 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Button,
-  InputGroup,
-  Label,
-  Toaster,
-  AnchorButton,
-} from '@blueprintjs/core';
+import { Button, InputGroup, Label, Toaster, Divider } from '@blueprintjs/core';
 import styles from './auth.module.scss';
 import { AuthContext, IForm } from '../context/AuthContext';
 import { useFetch } from '../hooks/fetch';
+import { GoogleButton } from '../components/GoogleButton';
 
 export const AuthPage = (): JSX.Element => {
   const { doFetch, loading, error, clearError } = useFetch();
@@ -62,7 +57,10 @@ export const AuthPage = (): JSX.Element => {
       </Label>
       <Button text="Login" disabled={loading} onClick={loginHandler} />
       <Button text="Register" disabled={loading} onClick={registerHandler} />
-      <AnchorButton text="Google" disabled={loading} href={googleLogin} />
+      <Divider />
+      Or sign in with...
+      <br />
+      <GoogleButton href={googleLogin || ''} disabled={loading} />
       <Toaster
         position="top-right"
         maxToasts={1}

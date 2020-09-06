@@ -1,0 +1,27 @@
+<svg width="19" height="19" xmlns="http://www.w3.org/2000/svg">
+ <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+ <title>btn_google_dark_normal_ios</title>
+ <desc>Created with Sketch.</desc>
+ <defs>
+  <rect rx="2" height="40" width="40" y="0" x="0" id="path-2"/>
+  <rect rx="1" height="38" width="38" y="5" x="5" id="path-3"/>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="21" width="21" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" fill="none" id="Google-Button">
+   <g stroke="null" id="9-PATCH"/>
+   <g stroke="null" id="logo_googleg_48dp">
+    <path stroke="null" fill="#4285F4" id="Shape" d="m18.30003,9.74515c0,-0.63819 -0.05727,-1.25182 -0.16364,-1.84091l-8.47636,0l0,3.48136l4.84364,0c-0.20864,1.125 -0.84273,2.07818 -1.79591,2.71636l0,2.25819l2.90863,0c1.70182,-1.56682 2.68364,-3.8741 2.68364,-6.615l0,0z"/>
+    <path stroke="null" fill="#34A853" id="Shape" d="m9.66003,18.5406c2.43,0 4.46727,-0.80591 5.95636,-2.18045l-2.90863,-2.25819c-0.80591,0.54 -1.83682,0.85909 -3.04773,0.85909c-2.34409,0 -4.32818,-1.58318 -5.03591,-3.71045l-3.00682,0l0,2.33182c1.48091,2.94136 4.52455,4.95818 8.04273,4.95818l0,0z"/>
+    <path stroke="null" fill="#FBBC05" id="Shape" d="m4.62412,11.2506c-0.18,-0.54 -0.28227,-1.11682 -0.28227,-1.71c0,-0.59318 0.10227,-1.17 0.28227,-1.71l0,-2.33182l-3.00682,0c-0.60954,1.215 -0.95727,2.58955 -0.95727,4.04182c0,1.45227 0.34773,2.82682 0.95727,4.04182l3.00682,-2.33182l0,0z"/>
+    <path stroke="null" fill="#EA4335" id="Shape" d="m9.66003,4.12015c1.32136,0 2.50773,0.45409 3.44045,1.3459l2.58137,-2.58136c-1.55864,-1.45227 -3.59591,-2.34409 -6.02182,-2.34409c-3.51818,0 -6.56182,2.01682 -8.04273,4.95818l3.00682,2.33182c0.70773,-2.12727 2.69182,-3.71045 5.03591,-3.71045l0,0z"/>
+    <path stroke="null" id="Shape" d="m0.66003,0.5406l18,0l0,18l-18,0l0,-18z"/>
+   </g>
+   <g stroke="null" id="handles_square"/>
+  </g>
+ </g>
+</svg>
