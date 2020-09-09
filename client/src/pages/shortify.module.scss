@@ -1,0 +1,27 @@
+.container {
+  margin: auto;
+  min-width: 100px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.label {
+  & > label {
+    width: 75px;
+  }
+
+  & > div {
+    flex: 1;
+    min-width: 100px;
+  }
+}
+
+.generateButton {
+  padding: 12px;
+}

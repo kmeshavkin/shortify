@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { InputGroup, Button } from '@blueprintjs/core';
+import { InputGroup, Button, FormGroup } from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
 import { ILink } from '../../../models/Link';
 import { LinkCard } from '../components/LinkCard';
+import styles from './shortify.module.scss';
 
 export const ShortifyPage = (): JSX.Element => {
   const { doFetch } = useFetch();
@@ -29,21 +30,43 @@ export const ShortifyPage = (): JSX.Element => {
   };
 
   return (
-    <div>
-      <InputGroup
-        placeholder="Paste link here..."
-        value={link}
-        autoFocus
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setLink(e.target.value)
-        }
+    <div className={styles.container}>
+      <h2 className={styles.header}>Shortify your URL</h2>
+      <FormGroup
+        className={styles.label}
+        label="Shortify link"
+        labelFor="link-input"
+        inline
+      >
+        <InputGroup
+          id="link-input"
+          placeholder="Paste link here..."
+          value={link}
+          autoFocus
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setLink(e.target.value)
+          }
+        />
+      </FormGroup>
+      <FormGroup
+        className={styles.label}
+        label="Limit clicks"
+        labelFor="clicks-input"
+        inline
+      >
+        <InputGroup
+          id="clicks-input"
+          placeholder="Empty for unlimited clicks"
+          value={clicksAmount === -1 ? '' : String(clicksAmount)}
+          onChange={changeClicksHandler}
+        />
+      </FormGroup>
+      <Button
+        className={styles.generateButton}
+        text="Generate link"
+        intent="success"
+        onClick={pressHandler}
       />
-      <InputGroup
-        placeholder="Limit link clicks. Leave empty for unlimited clicks"
-        value={clicksAmount === -1 ? '' : String(clicksAmount)}
-        onChange={changeClicksHandler}
-      />
-      <Button text="Generate link" intent="success" onClick={pressHandler} />
       {shortLinkData && LinkCard(shortLinkData)}
     </div>
   );
