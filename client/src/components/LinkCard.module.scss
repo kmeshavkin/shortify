@@ -1,0 +1,19 @@
+.card {
+  margin: auto;
+  margin-top: 15px;
+  max-width: 500px;
+}
+
+.row {
+  display: flex;
+
+  & > p {
+    min-width: 110px;
+    width: 110px;
+    padding-right: 10px;
+  }
+
+  & > b span {
+    max-width: 340px; // TODO: not responsive, also expands beyond container on click
+  }
+}
