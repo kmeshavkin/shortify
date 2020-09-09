@@ -17,10 +17,4 @@ export const GoogleButton = ({
       </div>
     </button>
   </a>
-  // <AnchorButton
-  //   icon={<img src={gLogo} alt="Google logo" />}
-  //   text="Google"
-  //   disabled={disabled}
-  //   href={href}
-  // />
 );
