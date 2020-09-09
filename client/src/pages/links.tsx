@@ -2,6 +2,8 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Spinner, Button } from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
 import { ILink } from '../../../models/Link';
+import { LinkCard } from '../components/LinkCard';
+import styles from './links.module.scss';
 
 export const LinksPage = (): JSX.Element => {
   const [links, setLinks] = useState<ILink[]>([]);
@@ -32,13 +34,7 @@ export const LinksPage = (): JSX.Element => {
     <div>
       {links.map((link) => (
         <div key={link._id}>
-          <p>From: {link.from}</p>
-          <p>To: {link.to}</p>
-          <p>
-            Link clicks left:{' '}
-            {link.clicksLeft === -1 ? 'Unlimited' : link.clicksLeft}
-          </p>
-          <Button icon="trash" onClick={() => deleteLink(link._id)} />
+          <LinkCard link={link} onTrashClick={deleteLink} />
         </div>
       ))}
     </div>

@@ -1,9 +1,15 @@
 import React from 'react';
-import { Card, EditableText } from '@blueprintjs/core';
+import { Card, EditableText, Button } from '@blueprintjs/core';
 import { ILink } from '../../../models/Link';
 import styles from './LinkCard.module.scss';
 
-export const LinkCard = (link: ILink): JSX.Element => (
+export const LinkCard = ({
+  link,
+  onTrashClick,
+}: {
+  link: ILink;
+  onTrashClick?: (linkId: string) => void;
+}): JSX.Element => (
   <Card className={styles.card}>
     <div className={styles.row}>
       <p>Full link: </p>
@@ -25,5 +31,12 @@ export const LinkCard = (link: ILink): JSX.Element => (
       <p>Creation date: </p>
       <b>{new Date(link.date).toLocaleDateString()}</b>
     </div>
+    {onTrashClick && (
+      <Button
+        className={styles.trash}
+        icon="trash"
+        onClick={() => onTrashClick(link._id)}
+      />
+    )}
   </Card>
 );
