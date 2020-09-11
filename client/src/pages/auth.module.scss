@@ -1,4 +1,54 @@
 .container {
   margin: auto;
-  width: 300px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.topContainer {
+  width: fit-content;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 60px minmax(60px, 100px) minmax(auto, 25px) minmax(
+      60px,
+      100px
+    );
+  grid-template-rows: repeat(3, 30px);
+  grid-gap: 1rem;
+}
+
+.orSignWith {
+  color: gray;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  margin: auto;
+  width: fit-content;
+  margin-bottom: 1rem;
+}
+
+.label {
+  margin: 0;
+  line-height: 30px;
+}
+
+.button {
+  grid-column-start: 2;
+  grid-column-end: 5;
+}
+
+.loginButton {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.registerButton {
+  grid-column-start: 4;
+  grid-column-end: 5;
 }

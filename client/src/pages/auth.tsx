@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, InputGroup, Label, Toaster, Divider } from '@blueprintjs/core';
+import {
+  Button,
+  InputGroup,
+  Toaster,
+  Divider,
+  FormGroup,
+} from '@blueprintjs/core';
 import styles from './auth.module.scss';
 import { AuthContext, IForm } from '../context/AuthContext';
 import { useFetch } from '../hooks/fetch';
@@ -35,37 +41,49 @@ export const AuthPage = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <h2>Auth</h2>
-      <Label>
-        Email
+      <h2 className={styles.header}>Login or register</h2>
+      <div className={styles.topContainer}>
+        <p className={styles.label}>Email</p>
         <InputGroup
+          className={styles.button}
           name="email"
           type="email"
           autoFocus
           value={form.email}
           onChange={changeHandler}
         />
-      </Label>
-      <Label>
-        Password
+        <p className={styles.label}>Password</p>
         <InputGroup
+          className={styles.button}
           name="password"
           type="password"
           value={form.password}
           onChange={changeHandler}
         />
-      </Label>
-      <Button text="Login" disabled={loading} onClick={loginHandler} />
-      <Button text="Register" disabled={loading} onClick={registerHandler} />
+        <Button
+          className={styles.loginButton}
+          text="Login"
+          disabled={loading}
+          onClick={loginHandler}
+          intent="success"
+        />
+        <Button
+          className={styles.registerButton}
+          text="Register"
+          disabled={loading}
+          onClick={registerHandler}
+        />
+      </div>
       <Divider />
-      Or sign in with...
-      <br />
-      <GoogleButton href={googleLogin || ''} disabled={loading} />
-      <Toaster
-        position="top-right"
-        maxToasts={1}
-        ref={(ref) => setToasterRef(ref)}
-      />
+      <div className={styles.bottomContainer}>
+        <p className={styles.orSignWith}>Or sign in with...</p>
+        <GoogleButton href={googleLogin || ''} disabled={loading} />
+        <Toaster
+          position="top-right"
+          maxToasts={1}
+          ref={(ref) => setToasterRef(ref)}
+        />
+      </div>
     </div>
   );
 };
