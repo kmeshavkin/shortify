@@ -29,18 +29,20 @@ export const Navbar = (): JSX.Element => {
           <Button minimal text="Links" />
         </NavLink>
         <BPNavbar.Divider />
-        {!isLogged && (
-          <NavLink to="/login">
-            <Button icon="log-in" intent="success" text="Login" />
-          </NavLink>
-        )}
-        {isLogged && (
+      </BPNavbar.Group>
+      <BPNavbar.Group align="right">
+        {isLogged ? (
           <Button
             disabled={loading}
             onClick={logout}
             intent="danger"
             icon="log-out"
+            text="Logout"
           />
+        ) : (
+          <NavLink to="/login">
+            <Button icon="log-in" intent="success" text="Login" />
+          </NavLink>
         )}
       </BPNavbar.Group>
     </BPNavbar>
