@@ -19,8 +19,18 @@
   }
 }
 
-.trash {
+.buttonSection {
   position: absolute;
   right: 10px;
   bottom: 10px;
+  display: flex;
+  flex-direction: column;
+
+  > * + * {
+    margin-top: 0.5rem;
+  }
+
+  .QRButton {
+    width: 30px;
+  }
 }
