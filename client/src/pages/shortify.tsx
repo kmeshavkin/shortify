@@ -69,7 +69,11 @@ export const ShortifyPage = (): JSX.Element => {
           onClick={pressHandler}
         />
       </div>
-      {shortLinkData && <LinkCard link={shortLinkData} />}
+      {shortLinkData && (
+        <div>
+          <LinkCard link={shortLinkData} />
+        </div>
+      )}
     </div>
   );
 };

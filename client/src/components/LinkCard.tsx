@@ -20,23 +20,31 @@ export const LinkCard = ({
     <Card className={styles.card}>
       <div className={styles.row}>
         <p>Full link: </p>
-        <b>
-          <EditableText value={link.from} selectAllOnFocus />
-        </b>
+        <EditableText
+          className={styles.value}
+          value={link.from}
+          selectAllOnFocus
+        />
       </div>
       <div className={styles.row}>
         <p>Short link: </p>
-        <b>
-          <EditableText value={link.to} selectAllOnFocus />
-        </b>
+        <EditableText
+          className={styles.value}
+          value={link.to}
+          selectAllOnFocus
+        />
       </div>
       <div className={styles.row}>
         <p>Link clicks left: </p>
-        <b>{link.clicksLeft === -1 ? 'Unlimited' : String(link.clicksLeft)}</b>
+        <p className={styles.value}>
+          {link.clicksLeft === -1 ? 'Unlimited' : String(link.clicksLeft)}
+        </p>
       </div>
       <div className={styles.row}>
         <p>Creation date: </p>
-        <b>{new Date(link.date).toLocaleDateString()}</b>
+        <p className={styles.value}>
+          {new Date(link.date).toLocaleDateString()}
+        </p>
       </div>
       <div className={styles.buttonSection}>
         <Popover position="right">

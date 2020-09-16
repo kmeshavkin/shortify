@@ -14,9 +14,19 @@
     padding-right: 10px;
   }
 
-  & > b span {
-    max-width: 340px; // TODO: not responsive, also expands beyond container on click
+  & > div {
+    height: fit-content;
+    max-width: calc(100% - 110px);
+
+    & > input,
+    & > span {
+      max-width: 100%;
+    }
   }
+}
+
+.value {
+  font-weight: bold;
 }
 
 .buttonSection {
