@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Button,
-  InputGroup,
-  Toaster,
-  Divider,
-  FormGroup,
-} from '@blueprintjs/core';
+import { Button, InputGroup, Toaster, Divider } from '@blueprintjs/core';
 import styles from './auth.module.scss';
 import { AuthContext, IForm } from '../context/AuthContext';
 import { useFetch } from '../hooks/fetch';

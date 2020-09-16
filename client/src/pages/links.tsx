@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Spinner, Button } from '@blueprintjs/core';
+import { Spinner } from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
 import { ILink } from '../../../models/Link';
 import { LinkCard } from '../components/LinkCard';
-import styles from './links.module.scss';
 
 export const LinksPage = (): JSX.Element => {
   const [links, setLinks] = useState<ILink[]>([]);

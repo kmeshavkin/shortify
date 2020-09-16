@@ -15,7 +15,7 @@ export const Navbar = (): JSX.Element => {
       setIsLogged(false);
       history.push('/');
     }
-  }, [doFetch, setIsLogged]);
+  }, [doFetch, setIsLogged, history]);
 
   return (
     <BPNavbar className="bp3-dark">
