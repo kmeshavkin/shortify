@@ -19,7 +19,15 @@ export const LinksPage = (): JSX.Element => {
 
   if (loading) return <Spinner />;
 
-  if (!links || !links.length) return <p>No links yet</p>;
+  if (!links || !links.length)
+    return (
+      <h2 style={{ textAlign: 'center' }}>
+        No links created yet, feel free to Shortify any link{' '}
+        <span role="img" aria-label="Smiley face">
+          😃
+        </span>
+      </h2>
+    );
 
   return (
     <div>
