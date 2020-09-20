@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Card, EditableText, Button, Popover } from '@blueprintjs/core';
 import qr from 'qr-image';
 import { ILink } from '../../../models/Link';
 import styles from './LinkCard.module.scss';
 import QRIcon from './QR_icon.svg';
+import { useFetch } from '../hooks/fetch';
 
 export const LinkCard = ({
   link,
-  onTrashClick,
+  afterDeleteCallback,
 }: {
   link: ILink;
-  onTrashClick?: (linkId: string) => void;
+  afterDeleteCallback?: (updatedLinks: ILink[]) => void;
 }): JSX.Element => {
+  const { doFetch, loading } = useFetch();
+  const deleteLink = useCallback(
+    async (id) => {
+      const fetched = await doFetch(`/api/link/delete/${id}`, 'POST');
+      if (afterDeleteCallback) afterDeleteCallback(fetched);
+    },
+    [doFetch]
+  );
+
   const qrCode = `data:image/svg+xml;utf8,${qr.imageSync(link.to, {
     type: 'svg',
   })}`;
@@ -57,13 +67,12 @@ export const LinkCard = ({
           />
           <img width={200} height={200} src={qrCode} alt="QR code" />
         </Popover>
-        {onTrashClick && (
-          <Button
-            intent="danger"
-            icon="trash"
-            onClick={() => onTrashClick(link._id)}
-          />
-        )}
+        <Button
+          intent="danger"
+          icon="trash"
+          loading={loading}
+          onClick={() => deleteLink(link._id)}
+        />
       </div>
     </Card>
   );

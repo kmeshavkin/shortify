@@ -13,14 +13,6 @@ export const LinksPage = (): JSX.Element => {
     setLinks(fetched);
   }, [doFetch]);
 
-  const deleteLink = useCallback(
-    async (id) => {
-      const fetched = await doFetch(`/api/link/delete/${id}`, 'POST');
-      setLinks(fetched);
-    },
-    [doFetch]
-  );
-
   useEffect(() => {
     fetchLinks();
   }, [fetchLinks]);
@@ -33,7 +25,7 @@ export const LinksPage = (): JSX.Element => {
     <div>
       {links.map((link) => (
         <div key={link._id}>
-          <LinkCard link={link} onTrashClick={deleteLink} />
+          <LinkCard link={link} afterDeleteCallback={setLinks} />
         </div>
       ))}
     </div>

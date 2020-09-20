@@ -71,7 +71,10 @@ export const ShortifyPage = (): JSX.Element => {
       </div>
       {shortLinkData && (
         <div>
-          <LinkCard link={shortLinkData} />
+          <LinkCard
+            link={shortLinkData}
+            afterDeleteCallback={() => setShortLinkData(null)}
+          />
         </div>
       )}
     </div>
