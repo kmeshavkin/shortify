@@ -19,15 +19,21 @@
 
 .label {
   & > label {
-    width: 75px;
+    min-width: 75px;
   }
 
   & > div {
-    flex: 1;
     min-width: 100px;
+    width: 100%;
   }
 }
 
 .generateButton {
   padding: 12px;
+  margin-left: 24px;
+  width: 120px;
+}
+
+.bottomContainer {
+  display: flex;
 }

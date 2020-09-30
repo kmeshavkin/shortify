@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputGroup, Button, FormGroup } from '@blueprintjs/core';
+import { InputGroup, Button, FormGroup, Slider } from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
 import { ILink } from '../../../models/Link';
 import { LinkCard } from '../components/LinkCard';
@@ -10,10 +10,12 @@ export const ShortifyPage = (): JSX.Element => {
   const [link, setLink] = useState('');
   const [shortLinkData, setShortLinkData] = useState<ILink | null>(null);
   const [clicksAmount, setClicksAmount] = useState<number>(-1);
+  const [linkLength, setLinkLength] = useState<number>(12);
 
   const pressHandler = async () => {
     const data = await doFetch('/api/link/generate', 'POST', {
       from: link,
+      length: linkLength,
       clicksLeft: clicksAmount,
     });
     if (data) setShortLinkData(data.link);
@@ -44,7 +46,7 @@ export const ShortifyPage = (): JSX.Element => {
             placeholder="Paste link here..."
             value={link}
             autoFocus
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
               setLink(e.target.value)
             }
           />
@@ -62,12 +64,22 @@ export const ShortifyPage = (): JSX.Element => {
             onChange={changeClicksHandler}
           />
         </FormGroup>
-        <Button
-          className={styles.generateButton}
-          text="Generate link"
-          intent="success"
-          onClick={pressHandler}
-        />
+        <div className={styles.bottomContainer}>
+          <Slider
+            value={linkLength}
+            onChange={setLinkLength}
+            onRelease={setLinkLength}
+            labelStepSize={4}
+            min={8}
+            max={32}
+          />
+          <Button
+            className={styles.generateButton}
+            text="Generate link"
+            intent="success"
+            onClick={pressHandler}
+          />
+        </div>
       </div>
       {shortLinkData && (
         <div>

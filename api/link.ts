@@ -8,9 +8,9 @@ const router = Router();
 router.post('/generate', async (req, res) => {
   try {
     const baseUrl = config.get('baseURL');
-    const { from, clicksLeft } = req.body;
+    const { from, length, clicksLeft } = req.body;
 
-    const code = await generateSentence(11, 5);
+    const code = await generateSentence(length, 5);
     const to = `${baseUrl}/t/${code}`;
 
     const link = new LinkModel({
