@@ -19,7 +19,7 @@ export const LinkCard = ({
       const fetched = await doFetch(`/api/link/delete/${id}`, 'POST');
       if (afterDeleteCallback) afterDeleteCallback(fetched);
     },
-    [doFetch]
+    [doFetch, afterDeleteCallback]
   );
 
   const qrCode = `data:image/svg+xml;utf8,${qr.imageSync(link.to, {
