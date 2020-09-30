@@ -3,6 +3,7 @@ import { Navbar as BPNavbar, Button } from '@blueprintjs/core';
 import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useFetch } from '../hooks/fetch';
+import styles from './Navbar.module.scss';
 
 export const Navbar = (): JSX.Element => {
   const history = useHistory();
@@ -18,7 +19,7 @@ export const Navbar = (): JSX.Element => {
   }, [doFetch, setIsLogged, history]);
 
   return (
-    <BPNavbar className="bp3-dark">
+    <BPNavbar className={`${styles.navbar} bp3-dark`}>
       <BPNavbar.Group align="left">
         <BPNavbar.Heading>Shortify</BPNavbar.Heading>
         <BPNavbar.Divider />
