@@ -30,9 +30,10 @@
       display: flex;
 
       .generateButton {
-        padding: 12px;
+        text-align: center;
+        padding: 5px 10px;
         margin-left: 24px;
-        width: 120px;
+        flex-basis: 120px;
       }
     }
   }
