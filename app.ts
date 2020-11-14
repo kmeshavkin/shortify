@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
@@ -26,6 +27,13 @@ app.use(
 app.use('/api/auth', authRouter);
 app.use('/api/link', linkRouter);
 app.use('/t', redirectRouter);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 // Mongo setup and project run point
 const PORT = config.get('port');
