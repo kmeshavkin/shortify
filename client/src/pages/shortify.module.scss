@@ -29,6 +29,14 @@
     .bottomContainer {
       display: flex;
 
+      .tooltip {
+        width: 100%;
+
+        > span {
+          width: 100%;
+        }
+      }
+
       .generateButton {
         text-align: center;
         padding: 5px 10px;

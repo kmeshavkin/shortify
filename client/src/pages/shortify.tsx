@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { InputGroup, Button, FormGroup, Slider } from '@blueprintjs/core';
+import {
+  InputGroup,
+  Button,
+  FormGroup,
+  Slider,
+  Tooltip,
+} from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
 import { ILink } from '../../../models/Link';
 import { LinkCard } from '../components/LinkCard';
@@ -65,14 +71,20 @@ export const ShortifyPage = (): JSX.Element => {
           />
         </FormGroup>
         <div className={styles.bottomContainer}>
-          <Slider
-            value={linkLength}
-            onChange={setLinkLength}
-            onRelease={setLinkLength}
-            labelStepSize={4}
-            min={8}
-            max={32}
-          />
+          <Tooltip
+            className={styles.tooltip}
+            content="Shortified link length"
+            position="bottom"
+          >
+            <Slider
+              value={linkLength}
+              onChange={setLinkLength}
+              onRelease={setLinkLength}
+              labelStepSize={4}
+              min={8}
+              max={32}
+            />
+          </Tooltip>
           <Button
             className={styles.generateButton}
             text="Generate link"
