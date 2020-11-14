@@ -12,7 +12,7 @@ export const Navbar = (): JSX.Element => {
 
   const logout = useCallback(async () => {
     const data = await doFetch('/api/auth/logout', 'POST');
-    if (data?.done) {
+    if (data.done) {
       setIsLogged(false);
       history.push('/');
     }

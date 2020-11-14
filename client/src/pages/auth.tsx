@@ -30,7 +30,7 @@ export const AuthPage = (): JSX.Element => {
   const loginHandler = async () => {
     if (toasterRef) toasterRef.clear();
     const data = await doFetch('api/auth/login', 'POST', { ...form });
-    if (data?.done) setIsLogged(true);
+    if (data.done) setIsLogged(true);
   };
 
   return (

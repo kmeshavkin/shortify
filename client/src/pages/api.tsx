@@ -13,7 +13,7 @@ export const ApiPage = (): JSX.Element => {
     const data = await doFetch(location.pathname + location.search, 'POST');
     switch (location.pathname) {
       case '/api/auth/google/redirect':
-        if (data?.done) setIsLogged(true);
+        if (data.done) setIsLogged(true);
         break;
       default:
         return <Redirect to="/" />;
