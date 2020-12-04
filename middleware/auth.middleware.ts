@@ -1,6 +1,10 @@
 import { LinkModel } from '../models/Link';
 
-export const AfterAuthMiddleware = async (req, res, next): Promise<void> => {
+export const AfterAuthMiddleware = async (
+  req: any,
+  res: any,
+  next
+): Promise<void> => {
   if (req.method === 'OPTIONS') {
     return next();
   }

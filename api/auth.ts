@@ -18,7 +18,7 @@ router.post(
     check('email', 'Wrong email format').isEmail(),
     check('password', 'Password cannot be empty').exists({ checkFalsy: true }),
   ],
-  async (req, res, next) => {
+  async (req: any, res: any, next) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -52,7 +52,7 @@ router.post(
 
 router.post(
   '/google/redirect',
-  async (req, res, next) => {
+  async (req: any, res: any, next) => {
     try {
       const { code, error } = req.query;
       if (error) throw new Error(error.toString());
@@ -84,7 +84,7 @@ router.post(
   AfterAuthMiddleware
 );
 
-router.post('/logout', async (req, res) => {
+router.post('/logout', async (req: any, res: any) => {
   try {
     // Destroying session is not necessary, just in case
     return req.session.destroy(() => res.json({ done: true }));
@@ -106,7 +106,7 @@ router.post(
       max: 40,
     }),
   ],
-  async (req, res) => {
+  async (req: any, res: any) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -134,7 +134,7 @@ router.post(
   }
 );
 
-router.post('/session', async (req, res) => {
+router.post('/session', async (req: any, res: any) => {
   try {
     const loginLink = oauth2Client.generateAuthUrl({
       access_type: 'offline',
