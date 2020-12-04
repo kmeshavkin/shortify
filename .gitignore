@@ -1,4 +1,7 @@
 .vscode
-node_modules
-config
-build
+
+backend/node_modules
+backend/config
+backend/build
+
+frontend/node_modules

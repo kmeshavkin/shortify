@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Card, EditableText, Button, Popover } from '@blueprintjs/core';
 import qr from 'qr-image';
-import { ILink } from '../../../models/Link';
+import { ILink } from '../../../backend/models/Link';
 import styles from './LinkCard.module.scss';
 import QRIcon from './QR_icon.svg';
 import { useFetch } from '../hooks/fetch';

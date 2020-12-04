@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Spinner } from '@blueprintjs/core';
 import { useFetch } from '../hooks/fetch';
-import { ILink } from '../../../models/Link';
+import { ILink } from '../../../backend/models/Link';
 import { LinkCard } from '../components/LinkCard';
 
 export const LinksPage = (): JSX.Element => {
