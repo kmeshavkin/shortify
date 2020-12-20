@@ -25,6 +25,8 @@
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
@@ -32,12 +34,11 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "@typescript-eslint/eslint-plugin": "^2.10.0",
-    "@typescript-eslint/parser": "^2.10.0"
+    "rimraf": "^3.0.2"
   },
   "scripts": {
     "start": "set PORT=8080 && react-scripts start",
-    "build": "react-scripts build && move-cli build ../backend/build",
+    "build": "react-scripts build && rimraf ../backend/build && move-cli build ../backend/build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
