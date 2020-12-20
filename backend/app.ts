@@ -30,7 +30,7 @@ app.use('/t', redirectRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'build')));
-  app.get('*', (req: any, res: any) => {
+  app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
 }

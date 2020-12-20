@@ -5,8 +5,9 @@ import { generateSentence } from '../utils/generateId';
 
 const router = Router();
 
-router.post('/generate', async (req: any, res: any) => {
+router.post('/generate', async (req, res) => {
   try {
+    const session = req.session as any;
     const baseUrl = config.get('baseURL');
     const { from, length, clicksLeft } = req.body;
 
@@ -17,7 +18,7 @@ router.post('/generate', async (req: any, res: any) => {
       code,
       to,
       from,
-      owner: req.session.userId || req.session.id,
+      owner: session.userId || session.id,
       clicksLeft,
     });
     await link.save();
@@ -27,10 +28,11 @@ router.post('/generate', async (req: any, res: any) => {
   }
 });
 
-router.get('/', async (req: any, res: any) => {
+router.get('/', async (req, res) => {
   try {
+    const session = req.session as any;
     const links = await LinkModel.find({
-      owner: req.session.userId || req.session.id,
+      owner: session.userId || session.id,
     });
     return res.json(links);
   } catch (error) {
@@ -39,7 +41,7 @@ router.get('/', async (req: any, res: any) => {
 });
 
 // Unused currently
-router.post('/:id', async (req: any, res: any) => {
+router.post('/:id', async (req, res) => {
   try {
     const link = await LinkModel.findById(req.params.id);
     return res.json(link);
@@ -48,11 +50,12 @@ router.post('/:id', async (req: any, res: any) => {
   }
 });
 
-router.post('/delete/:id', async (req: any, res: any) => {
+router.post('/delete/:id', async (req, res) => {
   try {
+    const session = req.session as any;
     await LinkModel.deleteOne({ _id: req.params.id });
     const links = await LinkModel.find({
-      owner: req.session.userId || req.session.id,
+      owner: session.userId || session.id,
     });
     return res.json(links);
   } catch (error) {

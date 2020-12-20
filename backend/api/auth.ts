@@ -18,7 +18,7 @@ router.post(
     check('email', 'Wrong email format').isEmail(),
     check('password', 'Password cannot be empty').exists({ checkFalsy: true }),
   ],
-  async (req: any, res: any, next) => {
+  async (req, res, next) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -52,8 +52,9 @@ router.post(
 
 router.post(
   '/google/redirect',
-  async (req: any, res: any, next) => {
+  async (req, res, next) => {
     try {
+      const session = req.session as any;
       const { code, error } = req.query;
       if (error) throw new Error(error.toString());
 
@@ -73,7 +74,7 @@ router.post(
         { email, password: '', googleId: externalId }, // TODO: make so it doesn't replace existing password
         { upsert: true, new: true }
       );
-      req.session.userId = candidate.id;
+      session.userId = candidate.id;
       res.json({ done: true });
     } catch (error) {
       console.log(error);
@@ -84,7 +85,7 @@ router.post(
   AfterAuthMiddleware
 );
 
-router.post('/logout', async (req: any, res: any) => {
+router.post('/logout', async (req, res) => {
   try {
     // Destroying session is not necessary, just in case
     return req.session.destroy(() => res.json({ done: true }));
@@ -106,7 +107,7 @@ router.post(
       max: 40,
     }),
   ],
-  async (req: any, res: any) => {
+  async (req, res) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -134,13 +135,14 @@ router.post(
   }
 );
 
-router.post('/session', async (req: any, res: any) => {
+router.post('/session', async (req, res) => {
   try {
+    const session = req.session as any;
     const loginLink = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       scope,
     });
-    return res.json({ loginLink, loggedIn: req.session.userId });
+    return res.json({ loginLink, loggedIn: session.userId });
   } catch (e) {
     return res.json({ loggedIn: false });
   }
