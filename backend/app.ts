@@ -28,7 +28,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/link', linkRouter);
 app.use('/t', redirectRouter);
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'development') {
   app.use('/', express.static(path.join(__dirname, 'build')));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));

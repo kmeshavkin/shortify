@@ -7,8 +7,12 @@ import { UserModel } from '../models/User';
 import { AfterAuthMiddleware } from '../middleware/auth.middleware';
 
 const { OAuth2 } = google.auth;
-const { clientID, clientSecret, redirectURLs, scope } = config.get('google');
-const oauth2Client = new OAuth2(clientID, clientSecret, redirectURLs);
+const { clientID, clientSecret, redirectPath, scope } = config.get('google');
+const oauth2Client = new OAuth2(
+  clientID,
+  clientSecret,
+  `${config.get('frontendHost')}/${redirectPath}`
+);
 
 const router = Router();
 router.post(

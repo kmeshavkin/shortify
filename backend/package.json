@@ -9,7 +9,8 @@
     "dev:fe": "npm run start --prefix ../frontend",
     "build:fe": "npm run build --prefix ../frontend",
     "start": "cross-env NODE_ENV=production node -r esm -r ts-node/register app.ts",
-    "deploy": "gcloud app deploy app.yaml --version prod3"
+    "start:lo": "cross-env NODE_ENV=localProduction node -r esm -r ts-node/register app.ts",
+    "deploy": "gcloud app deploy app.yaml --version prod"
   },
   "repository": {
     "type": "git",

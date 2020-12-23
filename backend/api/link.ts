@@ -8,11 +8,11 @@ const router = Router();
 router.post('/generate', async (req, res) => {
   try {
     const session = req.session as any;
-    const baseUrl = config.get('baseURL');
+    const backendHost = config.get('backendHost');
     const { from, length, clicksLeft } = req.body;
 
     const code = await generateSentence(length, 5);
-    const to = `${baseUrl}/t/${code}`;
+    const to = `${backendHost}/t/${code}`;
 
     const link = new LinkModel({
       code,
