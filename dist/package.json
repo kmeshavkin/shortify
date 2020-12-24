@@ -1,0 +1,25 @@
+{
+  "name": "dist",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app.js",
+    "start:lo": "cross-env NODE_ENV=localProduction node app.js",
+    "deploy": "gcloud app deploy app.yaml --version prod"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "connect-mongo": "^3.2.0",
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
+    "fakelish": "^0.3.0",
+    "googleapis": "^59.0.0",
+    "mongoose": "^5.10.5"
+  },
+  "devDependencies": {}
+}

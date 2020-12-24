@@ -1,22 +1,27 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "start": "set PORT=5000 && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "author": "Meshavkin Konstantin <meshavkin1996@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@blueprintjs/core": "^3.31.0",
     "@blueprintjs/icons": "^3.20.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.4",
-    "move-cli": "^1.2.1",
-    "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
     "qr-image": "^3.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
-    "typescript": "~4.0.2"
+    "react-scripts": "3.4.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.13",
@@ -34,13 +39,8 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "rimraf": "^3.0.2"
-  },
-  "scripts": {
-    "start": "set PORT=5000 && react-scripts start",
-    "build": "react-scripts build && rimraf ../backend/build && move-cli build ../backend/build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "node-sass": "^4.14.1",
+    "typescript": "~4.0.2"
   },
   "proxy": "http://localhost:8080",
   "browserslist": {
