@@ -8,17 +8,19 @@ import { authRouter } from './api/auth';
 import { linkRouter } from './api/link';
 import { redirectRouter } from './api/redirect';
 
+const { name, secret, maxAge } = config.get('session');
+
 const MongoStore = connectMongo(session);
 const app = express();
 app.use(express.json());
 app.use(
   session({
-    name: config.get('sessionName'),
-    secret: config.get('sessionSecret'),
+    name,
+    secret,
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { maxAge: 3600000, sameSite: true },
+    cookie: { maxAge, sameSite: true },
   })
 );
 
