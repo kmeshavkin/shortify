@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node app.js",
     "start:lo": "cross-env NODE_ENV=localProduction node app.js",
-    "deploy": "gcloud app deploy app.yaml --version prod"
+    "deploy": "gcloud app deploy app.yaml --version production"
   },
   "author": "",
   "license": "ISC",
