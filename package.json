@@ -6,7 +6,7 @@
     "dev": "concurrently \"npm run dev --prefix ./backend\" \"npm run start --prefix ./frontend\"",
     "build": "concurrently \"npm run build:be\" \"npm run build:fe\"",
     "build:be": "npm run build --prefix ./backend",
-    "build:fe": "npm run build --prefix ./frontend && rimraf ./dist/build && cp-cli ./frontend/build ./dist/build && rimraf ./frontend/build",
+    "build:fe": "npm run build --prefix ./frontend && rimraf ./dist/build && cpy ./frontend/build ./dist/build && rimraf ./frontend/build",
     "start": "npm run start --prefix ./dist",
     "start:lo": "npm run start:lo --prefix ./dist",
     "deploy": "npm run build && npm run deploy --prefix ./dist"
@@ -24,7 +24,7 @@
   "dependencies": {},
   "devDependencies": {
     "concurrently": "^5.3.0",
-    "cp-cli": "^2.0.0",
+    "cpy-cli": "^3.1.1",
     "rimraf": "^3.0.2"
   }
 }
