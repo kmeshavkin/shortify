@@ -48,16 +48,17 @@ var express_session_1 = __importDefault(require("express-session"));
 var auth_1 = require("./api/auth");
 var link_1 = require("./api/link");
 var redirect_1 = require("./api/redirect");
+var _a = config_1["default"].get('session'), name = _a.name, secret = _a.secret, maxAge = _a.maxAge;
 var MongoStore = connect_mongo_1["default"](express_session_1["default"]);
 var app = express_1["default"]();
 app.use(express_1["default"].json());
 app.use(express_session_1["default"]({
-    name: config_1["default"].get('sessionName'),
-    secret: config_1["default"].get('sessionSecret'),
+    name: name,
+    secret: secret,
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose_1["default"].connection }),
-    cookie: { maxAge: 3600000, sameSite: true }
+    cookie: { maxAge: maxAge, sameSite: true }
 }));
 // Routes setup
 // TODO: should be also 'secure: true' (production only, read here: https://github.com/expressjs/session#cookiesecure)
