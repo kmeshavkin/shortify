@@ -31,14 +31,11 @@ If you want to check my other projects, you can visit my portfolio: [https://kme
 - Simple middleware validation using express-validator
 - Googleapis for Google OAuth2 authentication (compliant with all Google requirements)
 - Deployed on [Google Cloud (App Engine)](https://cloud.google.com/appengine) that serves built frontend code
-- < 100 Mb RAM usage - backend also built before deployment (dev typescript is TOO heavy)
 - Straightforward build process - different configs for different environments (local development, local production for testing purposes, gcloud production), everything is managed from a single ./package.json file
 
 ## Code location/execution explanation:
 
 Dev backend is in ./backend, dev frontend is in ./frontend, built app and gcloud deploy (yaml file) is in ./dist, central package.json is in ./package.json
-
-...
 
 ## TODO:
 
@@ -46,3 +43,4 @@ Dev backend is in ./backend, dev frontend is in ./frontend, built app and gcloud
 - Make common config for shared variables (and reduce port definition duplication across project)
 - Create schema for config so it's easy to create when project forked (configs are hidden)
 - Tests!
+- Wake up gcloud container if portfolio is visited?
