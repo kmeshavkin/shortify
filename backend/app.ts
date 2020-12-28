@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
 import config from 'config';
 import session from 'express-session';
+import compression from 'compression';
 import { authRouter } from './api/auth';
 import { linkRouter } from './api/link';
 import { redirectRouter } from './api/redirect';
@@ -13,6 +14,7 @@ const { name, secret, maxAge } = config.get('session');
 const MongoStore = connectMongo(session);
 const app = express();
 app.use(express.json());
+app.use(compression());
 app.use(
   session({
     name,

@@ -45,6 +45,7 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var connect_mongo_1 = __importDefault(require("connect-mongo"));
 var config_1 = __importDefault(require("config"));
 var express_session_1 = __importDefault(require("express-session"));
+var compression_1 = __importDefault(require("compression"));
 var auth_1 = require("./api/auth");
 var link_1 = require("./api/link");
 var redirect_1 = require("./api/redirect");
@@ -52,6 +53,7 @@ var _a = config_1["default"].get('session'), name = _a.name, secret = _a.secret,
 var MongoStore = connect_mongo_1["default"](express_session_1["default"]);
 var app = express_1["default"]();
 app.use(express_1["default"].json());
+app.use(compression_1["default"]());
 app.use(express_session_1["default"]({
     name: name,
     secret: secret,
