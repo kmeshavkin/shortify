@@ -8,23 +8,11 @@ import { ApiPage } from './pages/api';
 export const useRoutes = (isLogged: boolean): JSX.Element => {
   return (
     <Switch>
-      <Route path="/" exact>
-        <ShortifyPage />
-      </Route>
-      <Route path="/links" exact>
-        <LinksPage />
-      </Route>
-      {!isLogged && (
-        <>
-          <Route path="/login" exact>
-            <AuthPage />
-          </Route>
-          <Route path="/api">
-            <ApiPage />
-          </Route>
-        </>
-      )}
-      <Redirect to="/" />
+      <Route path="/" exact component={ShortifyPage} />
+      <Route path="/links" exact component={LinksPage} />
+      {isLogged && <Redirect to="/" />}
+      <Route path="/login" exact component={AuthPage} />
+      <Route path="/api" component={ApiPage} />
     </Switch>
   );
 };

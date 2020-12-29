@@ -36,7 +36,7 @@ export const AuthPage = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Login or register</h2>
-      <div className={styles.topContainer}>
+      <form className={styles.topContainer}>
         <p className={styles.label}>Email</p>
         <InputGroup
           className={styles.button}
@@ -45,12 +45,14 @@ export const AuthPage = (): JSX.Element => {
           autoFocus
           value={form.email}
           onChange={changeHandler}
+          autoComplete="email"
         />
         <p className={styles.label}>Password</p>
         <InputGroup
           className={styles.button}
           name="password"
           type="password"
+          autoComplete="current-password"
           value={form.password}
           onChange={changeHandler}
         />
@@ -67,7 +69,7 @@ export const AuthPage = (): JSX.Element => {
           disabled={loading}
           onClick={registerHandler}
         />
-      </div>
+      </form>
       <Divider />
       <div className={styles.bottomContainer}>
         <p className={styles.orSignWith}>Or sign in with...</p>
