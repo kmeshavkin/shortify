@@ -36,10 +36,36 @@ If you want to check my other projects, you can visit my portfolio: [https://kme
 
 Dev backend is in ./backend, dev frontend is in ./frontend, built app and gcloud deploy (yaml file) is in ./dist, central package.json is in ./package.json
 
+### Config structure
+
+Configs are located in backend/config folder (file `default.json` for development purposes) and in dist/config (file `production.json` for production on gcloud and `localProduction.json` for running production version on local machine), but they are hidden in git.
+
+They currently have common structure and typed as follows:
+
+```typescript
+{
+  port: number,
+  frontendHost: string,
+  backendHost: string,
+  session: {
+    name: string,
+    secret: string,
+    maxAge: number
+  },
+  mongoURL: string,
+  google: {
+    clientID: string,
+    clientSecret: string,
+    redirectPath: string,
+    scope: string[]
+  }
+}
+```
+
 ## TODO
 
-- Buy Google domain and link to this project (also edit links in README)
-- Make common config for shared variables (and reduce port definition duplication across project)
-- Create schema for config so it's easy to create when project forked (configs are hidden)
 - Tests!
+- Fix some console errors
+- Add favicon
+- Make common config for shared variables (and reduce port definition duplication across project)
 - Wake up gcloud container if portfolio is visited?
