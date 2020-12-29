@@ -22,12 +22,11 @@ app.use(
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { maxAge, sameSite: true },
+    cookie: { maxAge, sameSite: true, secure: 'auto' },
   })
 );
 
 // Routes setup
-// TODO: should be also 'secure: true' (production only, read here: https://github.com/expressjs/session#cookiesecure)
 app.use('/api/auth', authRouter);
 app.use('/api/link', linkRouter);
 app.use('/t', redirectRouter);
@@ -40,8 +39,6 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 // Mongo setup and project run point
-const PORT = config.get('port');
-
 (async function start() {
   await mongoose.connect(config.get('mongoURL'), {
     useNewUrlParser: true,
@@ -54,5 +51,6 @@ const PORT = config.get('port');
   // mongoose.model('sessions').collection.watch().stream().on('data', (data) => {
   //     console.log(data.operationType);
   // });
+  const PORT = config.get('port');
   app.listen(PORT, () => console.log(`Started on port ${PORT}`));
 })();

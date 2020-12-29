@@ -60,10 +60,9 @@ app.use(express_session_1["default"]({
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose_1["default"].connection }),
-    cookie: { maxAge: maxAge, sameSite: true }
+    cookie: { maxAge: maxAge, sameSite: true, secure: 'auto' }
 }));
 // Routes setup
-// TODO: should be also 'secure: true' (production only, read here: https://github.com/expressjs/session#cookiesecure)
 app.use('/api/auth', auth_1.authRouter);
 app.use('/api/link', link_1.linkRouter);
 app.use('/t', redirect_1.redirectRouter);
@@ -74,9 +73,9 @@ if (process.env.NODE_ENV !== 'development') {
     });
 }
 // Mongo setup and project run point
-var PORT = config_1["default"].get('port');
 (function start() {
     return __awaiter(this, void 0, void 0, function () {
+        var PORT;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, mongoose_1["default"].connect(config_1["default"].get('mongoURL'), {
@@ -87,10 +86,7 @@ var PORT = config_1["default"].get('port');
                     })];
                 case 1:
                     _a.sent();
-                    // TODO: Somehow access sessions schema and add hook to remove all links linked to expired session
-                    // mongoose.model('sessions').collection.watch().stream().on('data', (data) => {
-                    //     console.log(data.operationType);
-                    // });
+                    PORT = config_1["default"].get('port');
                     app.listen(PORT, function () { return console.log("Started on port " + PORT); });
                     return [2 /*return*/];
             }
