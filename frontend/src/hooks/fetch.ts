@@ -7,22 +7,26 @@ type requestFunc = (
   headers?: Record<string, string>
 ) => Promise<any>;
 
-export interface IUseFetch {
+export interface UseFetch {
   loading: boolean;
   error: null | string;
   doFetch: requestFunc;
+  abort: () => void;
   clearError: () => void;
 }
 
-export const useFetch = (): IUseFetch => {
+export const useFetch = (): UseFetch => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
+
+  const { signal, abort } = new AbortController();
 
   const doFetch: requestFunc = useCallback(
     async (url, method = 'GET', body, headers = {}) => {
       setLoading(true);
       try {
         const response = await fetch(url, {
+          signal,
           method,
           headers: body
             ? { ...headers, 'Content-Type': 'application/json' }
@@ -52,6 +56,7 @@ export const useFetch = (): IUseFetch => {
     loading,
     error,
     doFetch,
+    abort,
     clearError,
   };
 };

@@ -6,7 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export const ApiPage = (): JSX.Element => {
   const location = useLocation();
-  const { doFetch } = useFetch();
+  const { doFetch, abort } = useFetch();
   const { setIsLogged } = useContext(AuthContext);
 
   const sendRequest = useCallback(async () => {
@@ -18,10 +18,9 @@ export const ApiPage = (): JSX.Element => {
       default:
         return <Redirect to="/" />;
     }
-  }, [doFetch, setIsLogged, location.pathname, location.search]);
+    return abort;
+  }, [doFetch, setIsLogged, location.pathname, location.search, abort]);
 
-  // TODO: fix unmount before request finishes:
-  // "To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function"
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
