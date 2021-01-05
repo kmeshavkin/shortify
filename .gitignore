@@ -4,8 +4,9 @@ node_modules
 
 frontend/build
 
-backend/config
 backend/build
+backend/config/*
+!backend/config/sampleConfig.json
 
 dist/build
 dist/config

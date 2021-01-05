@@ -1,0 +1,20 @@
+{
+  "port": 8080,
+  "frontendHost": "http://localhost:5000",
+  "backendHost": "http://localhost:8080",
+  "session": {
+    "name": "<session name>",
+    "secret": "<session password>",
+    "maxAge": 86400000
+  },
+  "mongoURL": "mongodb://<mongoUrl>",
+  "google": {
+    "clientID": "<id>.apps.googleusercontent.com",
+    "clientSecret": "<secret>",
+    "redirectPath": "api/auth/google/redirect",
+    "scope": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  }
+}

@@ -40,32 +40,11 @@ Dev backend is in ./backend, dev frontend is in ./frontend, built app and gcloud
 
 Configs are located in backend/config folder (file `default.json` for development purposes) and in dist/config (file `production.json` for production on gcloud and `localProduction.json` for running production version on local machine), but they are hidden in git.
 
-They currently have common structure and typed as follows:
-
-```typescript
-{
-  port: number,
-  frontendHost: string,
-  backendHost: string,
-  session: {
-    name: string,
-    secret: string,
-    maxAge: number
-  },
-  mongoURL: string,
-  google: {
-    clientID: string,
-    clientSecret: string,
-    redirectPath: string,
-    scope: string[]
-  }
-}
-```
+Sample config is included in backend/config/sampleConfig.json
 
 ## TODO
 
 - Tests!
 - Fix some console errors
 - Add favicon
-- Make common config for shared variables (and reduce port definition duplication across project)
 - Wake up gcloud container if portfolio is visited?
