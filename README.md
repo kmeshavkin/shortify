@@ -46,5 +46,4 @@ Sample config is included in backend/config/sampleConfig.json
 
 - Tests!
 - Fix some console errors
-- Add favicon
 - Wake up gcloud container if portfolio is visited?
