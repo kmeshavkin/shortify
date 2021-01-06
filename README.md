@@ -44,6 +44,7 @@ Sample config is included in backend/config/sampleConfig.json
 
 ## TODO
 
-- Tests!
+- Tests! (various connections to services (mongodb, google, etc.), express (api, etc.), react components (react-testing-app), e2e)
+- https://github.com/Shopify/eslint-plugin-shopify/issues/159 ?
 - Fix some console errors
 - Wake up gcloud container if portfolio is visited?
