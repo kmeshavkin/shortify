@@ -47,6 +47,8 @@ function generateSentence(length, maxWordLength) {
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
+                    if (length < 3)
+                        throw new Error('Sentence length cannot be less than 3');
                     str = '';
                     _e.label = 1;
                 case 1:

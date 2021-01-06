@@ -8,6 +8,7 @@ export async function generateSentence(
   length: number,
   maxWordLength: number
 ): Promise<string> {
+  if (length < 3) throw new Error('Sentence length cannot be less than 3');
   let str = '';
   // left 2 for twoDigitNumber and 1 so generateFakeWordByLength doesn't have to generate word with length of 1
   while (str.length < length - maxWordLength - 3) {
