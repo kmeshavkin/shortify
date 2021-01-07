@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix ./backend\" \"npm run start --prefix ./frontend\"",
+    "test": "npm run test --prefix ./backend",
     "build": "concurrently \"npm run build:be\" \"npm run build:fe\"",
     "build:be": "npm run build --prefix ./backend",
     "build:fe": "npm run build --prefix ./frontend && rimraf ./dist/build && ncp ./frontend/build ./dist/build && rimraf ./frontend/build",
