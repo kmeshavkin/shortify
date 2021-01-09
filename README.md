@@ -2,7 +2,9 @@
 
 Fullstack (Express/React) link shortener app deployed on Google Cloud.
 
-#### Deployed app (interactive): [https://shortify-286600.appspot.com/](https://shortify-286600.appspot.com/) (temporary link)
+**Deployed app (interactive): [https://shortify-286600.appspot.com/](https://shortify-286600.appspot.com/)**
+
+*Please note that currently first load probably will take 5-6 seconds because I'm running this app on free gcloud quota, so after some inactivity container actually shuts down (therefore needs to be warmed up on first visit)*
 
 Paste link, pick length for short link, limit clicks (not unique, empty for infinite) and get shortened link with QR-code that saved in database.
 
@@ -46,5 +48,4 @@ Sample config is included in backend/config/sampleConfig.json
 
 - Tests! (various connections to services (mongodb, google, etc.), express (api, etc.), react components (react-testing-app), e2e)
 - https://github.com/Shopify/eslint-plugin-shopify/issues/159 ?
-- Fix some console errors
 - Wake up gcloud container if portfolio is visited?
