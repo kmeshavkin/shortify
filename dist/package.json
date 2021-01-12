@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node app.js",
     "start:lo": "cross-env NODE_ENV=localProduction node app.js",
-    "deploy": "gcloud app deploy app.yaml --version production"
+    "build": "gcloud builds submit --tag gcr.io/shortify-286600/shortify",
+    "deploy": "gcloud run deploy --image gcr.io/shortify-286600/shortify --platform managed --max-instances 1 --concurrency 2"
   },
   "author": "",
   "license": "ISC",

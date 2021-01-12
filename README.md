@@ -2,9 +2,7 @@
 
 Fullstack (Express/React) link shortener app deployed on Google Cloud.
 
-**Deployed app (interactive): [https://shortify-286600.appspot.com/](https://shortify-286600.appspot.com/)**
-
-*Please note that currently first load probably will take 5-6 seconds because I'm running this app on free gcloud quota, so after some inactivity container actually shuts down (therefore needs to be warmed up on first visit)*
+**Deployed app (interactive): [https://shortify-5kyuow2vuq-ew.a.run.app](https://shortify-5kyuow2vuq-ew.a.run.app)**
 
 Paste link, pick length for short link, limit clicks (not unique, empty for infinite) and get shortened link with QR-code that saved in database.
 
@@ -31,7 +29,7 @@ If you want to check my other projects, you can visit my portfolio: [https://kme
 - Server-side session management - express-session with connect-mongo to store sessions in MongoDB
 - Googleapis for Google OAuth2 authentication (compliant with all Google requirements)
 - Simple middleware authentication validation using express-validator
-- Deployed on [Google Cloud (App Engine)](https://cloud.google.com/appengine) that serves built frontend code
+- Deployed on [Google Cloud Run](https://cloud.google.com/run) that serves built frontend code
 - Straightforward build process - different configs for different environments (local development, local production for testing purposes, gcloud production), everything is managed from a single ./package.json file
 
 ## Code location/execution explanation
@@ -48,4 +46,3 @@ Sample config is included in backend/config/sampleConfig.json
 
 - Tests! (various connections to services (mongodb, google, etc.), express (api, etc.), react components (react-testing-app), e2e)
 - https://github.com/Shopify/eslint-plugin-shopify/issues/159 ?
-- Wake up gcloud container if portfolio is visited?
