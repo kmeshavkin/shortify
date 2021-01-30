@@ -2,7 +2,7 @@
 
 Fullstack (Express/React) link shortener app deployed on Google Cloud.
 
-**Deployed app (interactive): [https://shortify-5kyuow2vuq-ew.a.run.app](https://shortify-5kyuow2vuq-ew.a.run.app)**
+**Deployed app (interactive): [https://sh.kmesh.dev/](https://sh.kmesh.dev/)**
 
 Paste link, pick length for short link, limit clicks (not unique, empty for infinite) and get shortened link with QR-code that saved in database.
 
