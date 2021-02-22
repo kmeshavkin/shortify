@@ -11,7 +11,8 @@
     "build:be": "npm run test && npm run build --prefix ./backend",
     "build:fe": "npm run build --prefix ./frontend && rimraf ./dist/build && ncp ./frontend/build ./dist/build && rimraf ./frontend/build",
     "build:dist": "npm run build --prefix ./dist",
-    "deploy": "npm run build && npm run deploy --prefix ./dist"
+    "predeploy": "npm run build",
+    "deploy": "npm run deploy --prefix ./dist"
   },
   "repository": {
     "type": "git",
