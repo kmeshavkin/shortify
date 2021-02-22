@@ -46,3 +46,4 @@ Sample config is included in backend/config/sampleConfig.json
 
 - Tests! (various connections to services (mongodb, google, etc.), express (api, etc.), react components (react-testing-app), e2e)
 - https://github.com/Shopify/eslint-plugin-shopify/issues/159 ?
+- Add link to portfolio
