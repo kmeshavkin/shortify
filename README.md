@@ -10,7 +10,7 @@ If you are not logged in, links will be stored under your session (with 1 day ex
 
 You can see and manage all your links under "Links" page.
 
-If you want to check my other projects, you can visit my portfolio: [https://kmeshavkin.github.io/](https://kmeshavkin.github.io/)
+If you want to check my other projects, you can visit my portfolio: [https://portfolio.kmesh.dev/](https://portfolio.kmesh.dev/)
 
 ## Features
 
