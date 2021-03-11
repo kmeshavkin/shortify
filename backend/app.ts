@@ -8,6 +8,7 @@ import compression from 'compression';
 import { authRouter } from './api/auth';
 import { linkRouter } from './api/link';
 import { redirectRouter } from './api/redirect';
+import { pingRouter } from './api/ping';
 
 const { name, secret, maxAge } = config.get('session');
 
@@ -30,6 +31,7 @@ app.use(
 app.use('/api/auth', authRouter);
 app.use('/api/link', linkRouter);
 app.use('/t', redirectRouter);
+app.use('/info/ping', pingRouter);
 
 if (process.env.NODE_ENV !== 'development') {
   app.use('/', express.static(path.join(__dirname, 'build')));

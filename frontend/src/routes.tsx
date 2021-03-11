@@ -13,6 +13,7 @@ export const useRoutes = (isLogged: boolean): JSX.Element => {
       {isLogged && <Redirect to="/" />}
       <Route path="/login" exact component={AuthPage} />
       <Route path="/api" component={ApiPage} />
+      <Redirect to="/" />
     </Switch>
   );
 };

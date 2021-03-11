@@ -49,6 +49,7 @@ var compression_1 = __importDefault(require("compression"));
 var auth_1 = require("./api/auth");
 var link_1 = require("./api/link");
 var redirect_1 = require("./api/redirect");
+var ping_1 = require("./api/ping");
 var _a = config_1["default"].get('session'), name = _a.name, secret = _a.secret, maxAge = _a.maxAge;
 var MongoStore = connect_mongo_1["default"](express_session_1["default"]);
 var app = express_1["default"]();
@@ -66,6 +67,7 @@ app.use(express_session_1["default"]({
 app.use('/api/auth', auth_1.authRouter);
 app.use('/api/link', link_1.linkRouter);
 app.use('/t', redirect_1.redirectRouter);
+app.use('/info/ping', ping_1.pingRouter);
 if (process.env.NODE_ENV !== 'development') {
     app.use('/', express_1["default"].static(path_1["default"].join(__dirname, 'build')));
     app.get('*', function (req, res) {
