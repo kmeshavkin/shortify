@@ -10,4 +10,4 @@ var schema = new mongoose_1.Schema({
     clicksLeft: { type: Number, "default": 0 },
     owner: { type: String, required: true }
 });
-exports.LinkModel = mongoose_1.model('Link', schema);
+exports.LinkModel = (0, mongoose_1.model)('Link', schema);

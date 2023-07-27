@@ -41,7 +41,7 @@ export const useFetch = (): UseFetch => {
 
         setLoading(false);
         return data;
-      } catch (e) {
+      } catch (e: any) {
         setLoading(false);
         setError(e.message);
         return null;

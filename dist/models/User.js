@@ -8,4 +8,4 @@ var schema = new mongoose_1.Schema({
     googleId: { type: String, unique: true, sparse: true },
     links: [{ type: mongoose_1.Types.ObjectId, ref: 'Link' }]
 });
-exports.UserModel = mongoose_1.model('User', schema);
+exports.UserModel = (0, mongoose_1.model)('User', schema);

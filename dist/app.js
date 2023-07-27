@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -51,11 +51,14 @@ var link_1 = require("./api/link");
 var redirect_1 = require("./api/redirect");
 var ping_1 = require("./api/ping");
 var _a = config_1["default"].get('session'), name = _a.name, secret = _a.secret, maxAge = _a.maxAge;
-var MongoStore = connect_mongo_1["default"](express_session_1["default"]);
-var app = express_1["default"]();
+// TODO: quick fix for older version
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+var MongoStore = (0, connect_mongo_1["default"])(express_session_1["default"]);
+var app = (0, express_1["default"])();
 app.use(express_1["default"].json());
-app.use(compression_1["default"]());
-app.use(express_session_1["default"]({
+app.use((0, compression_1["default"])());
+app.use((0, express_session_1["default"])({
     name: name,
     secret: secret,
     resave: true,
@@ -89,7 +92,7 @@ if (process.env.NODE_ENV !== 'development') {
                 case 1:
                     _a.sent();
                     PORT = config_1["default"].get('port');
-                    app.listen(PORT, function () { return console.log("Started on port " + PORT); });
+                    app.listen(PORT, function () { return console.log("Started on port ".concat(PORT)); });
                     return [2 /*return*/];
             }
         });

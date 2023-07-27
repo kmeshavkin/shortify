@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -55,14 +55,14 @@ function generateSentence(length, maxWordLength) {
                     if (!(str.length < length - maxWordLength - 3)) return [3 /*break*/, 3];
                     _a = str;
                     _b = capitalLetter;
-                    return [4 /*yield*/, fakelish_1.generateFakeWord(2, maxWordLength, 3)];
+                    return [4 /*yield*/, (0, fakelish_1.generateFakeWord)(2, maxWordLength, 3)];
                 case 2:
                     str = _a + _b.apply(void 0, [_e.sent()]);
                     return [3 /*break*/, 1];
                 case 3:
                     _c = str;
                     _d = capitalLetter;
-                    return [4 /*yield*/, fakelish_1.generateFakeWordByLength(length - str.length - 2, 3)];
+                    return [4 /*yield*/, (0, fakelish_1.generateFakeWordByLength)(length - str.length - 2, 3)];
                 case 4:
                     str = _c + _d.apply(void 0, [_e.sent()]);
                     twoDigitNumber = Math.floor(Math.random() * 100)

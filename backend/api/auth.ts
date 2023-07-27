@@ -7,7 +7,7 @@ import { UserModel } from '../models/User';
 import { AfterAuthMiddleware } from '../middleware/auth.middleware';
 
 const { OAuth2 } = google.auth;
-const { clientID, clientSecret, redirectPath, scope } = config.get('google');
+const { clientID, clientSecret, redirectPath, scope } = config.get<any>('google');
 const oauth2Client = new OAuth2(
   clientID,
   clientSecret,

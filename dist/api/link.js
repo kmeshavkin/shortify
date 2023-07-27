@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -44,7 +44,7 @@ var config_1 = __importDefault(require("config"));
 var express_1 = require("express");
 var Link_1 = require("../models/Link");
 var generateId_1 = require("../utils/generateId");
-var router = express_1.Router();
+var router = (0, express_1.Router)();
 router.post('/generate', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var session, backendHost, _a, from, length_1, clicksLeft, code, to, link, error_1;
     return __generator(this, function (_b) {
@@ -54,10 +54,10 @@ router.post('/generate', function (req, res) { return __awaiter(void 0, void 0, 
                 session = req.session;
                 backendHost = config_1["default"].get('backendHost');
                 _a = req.body, from = _a.from, length_1 = _a.length, clicksLeft = _a.clicksLeft;
-                return [4 /*yield*/, generateId_1.generateSentence(length_1, 5)];
+                return [4 /*yield*/, (0, generateId_1.generateSentence)(length_1, 5)];
             case 1:
                 code = _b.sent();
-                to = backendHost + "/t/" + code;
+                to = "".concat(backendHost, "/t/").concat(code);
                 link = new Link_1.LinkModel({
                     code: code,
                     to: to,

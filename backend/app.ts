@@ -10,8 +10,11 @@ import { linkRouter } from './api/link';
 import { redirectRouter } from './api/redirect';
 import { pingRouter } from './api/ping';
 
-const { name, secret, maxAge } = config.get('session');
+const { name, secret, maxAge } = config.get<any>('session');
 
+// TODO: quick fix for older version
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const MongoStore = connectMongo(session);
 const app = express();
 app.use(express.json());

@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -49,19 +49,19 @@ var User_1 = require("../models/User");
 var auth_middleware_1 = require("../middleware/auth.middleware");
 var OAuth2 = googleapis_1.google.auth.OAuth2;
 var _a = config_1["default"].get('google'), clientID = _a.clientID, clientSecret = _a.clientSecret, redirectPath = _a.redirectPath, scope = _a.scope;
-var oauth2Client = new OAuth2(clientID, clientSecret, config_1["default"].get('frontendHost') + "/" + redirectPath);
-var router = express_1.Router();
+var oauth2Client = new OAuth2(clientID, clientSecret, "".concat(config_1["default"].get('frontendHost'), "/").concat(redirectPath));
+var router = (0, express_1.Router)();
 router.post('/login', [
-    express_validator_1.check('email', 'Email cannot be empty').exists({ checkFalsy: true }),
-    express_validator_1.check('email', 'Wrong email format').isEmail(),
-    express_validator_1.check('password', 'Password cannot be empty').exists({ checkFalsy: true }),
+    (0, express_validator_1.check)('email', 'Email cannot be empty').exists({ checkFalsy: true }),
+    (0, express_validator_1.check)('email', 'Wrong email format').isEmail(),
+    (0, express_validator_1.check)('password', 'Password cannot be empty').exists({ checkFalsy: true }),
 ], function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var errors, _a, email, password, user, isMatch, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                errors = express_validator_1.validationResult(req);
+                errors = (0, express_validator_1.validationResult)(req);
                 if (!errors.isEmpty()) {
                     return [2 /*return*/, res.status(400).json({
                             errors: errors.array(),
@@ -142,12 +142,12 @@ router.post('/logout', function (req, res) { return __awaiter(void 0, void 0, vo
     });
 }); });
 router.post('/register', [
-    express_validator_1.check('email', 'Email cannot be empty').exists({ checkFalsy: true }),
-    express_validator_1.check('email', 'Wrong email format').isEmail(),
-    express_validator_1.check('password', 'Password length should be at least 6').isLength({
+    (0, express_validator_1.check)('email', 'Email cannot be empty').exists({ checkFalsy: true }),
+    (0, express_validator_1.check)('email', 'Wrong email format').isEmail(),
+    (0, express_validator_1.check)('password', 'Password length should be at least 6').isLength({
         min: 6
     }),
-    express_validator_1.check('password', 'Password length should be less than 40').isLength({
+    (0, express_validator_1.check)('password', 'Password length should be less than 40').isLength({
         max: 40
     }),
 ], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -156,7 +156,7 @@ router.post('/register', [
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 4, , 5]);
-                errors = express_validator_1.validationResult(req);
+                errors = (0, express_validator_1.validationResult)(req);
                 if (!errors.isEmpty()) {
                     return [2 /*return*/, res.status(400).json({
                             errors: errors.array(),
