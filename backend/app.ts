@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
-import connectMongo from 'connect-mongo';
+import ConnectMongo from 'connect-mongo';
 import config from 'config';
 import session from 'express-session';
 import compression from 'compression';
@@ -12,10 +12,6 @@ import { pingRouter } from './api/ping';
 
 const { name, secret, maxAge } = config.get<any>('session');
 
-// TODO: quick fix for older version
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const MongoStore = connectMongo(session);
 const app = express();
 app.use(express.json());
 app.use(compression());
@@ -25,7 +21,7 @@ app.use(
     secret,
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: ConnectMongo.create({ mongoUrl: config.get('mongoURL') }),
     cookie: { maxAge, sameSite: true, secure: 'auto' },
   })
 );

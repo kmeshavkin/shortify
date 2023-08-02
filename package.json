@@ -7,7 +7,7 @@
     "test": "npm run test --prefix ./backend",
     "start": "npm run start --prefix ./dist",
     "start:lo": "npm run start:lo --prefix ./dist",
-    "build": "concurrently \"npm run build:be\" \"npm run build:fe\" \"npm run build:dist\"",
+    "build": "npm run build:be && npm run build:fe && npm run build:dist",
     "build:be": "npm run test && npm run build --prefix ./backend",
     "build:fe": "npm run build --prefix ./frontend && rimraf ./dist/build && ncp ./frontend/build ./dist/build && rimraf ./frontend/build",
     "build:dist": "npm run build --prefix ./dist",

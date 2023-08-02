@@ -42,6 +42,8 @@ Configs are located in backend/config folder (file `default.json` for developmen
 
 Sample config is included in backend/config/sampleConfig.json
 
+**Warning!** When deploying to Firebase, session name has to be `__session`, see https://firebase.google.com/docs/hosting/manage-cache#using_cookies.
+
 ## TODO
 
 - Tests! (various connections to services (mongodb, google, etc.), express (api, etc.), react components (react-testing-app), e2e)

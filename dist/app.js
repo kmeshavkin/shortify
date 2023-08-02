@@ -51,10 +51,6 @@ var link_1 = require("./api/link");
 var redirect_1 = require("./api/redirect");
 var ping_1 = require("./api/ping");
 var _a = config_1["default"].get('session'), name = _a.name, secret = _a.secret, maxAge = _a.maxAge;
-// TODO: quick fix for older version
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-var MongoStore = (0, connect_mongo_1["default"])(express_session_1["default"]);
 var app = (0, express_1["default"])();
 app.use(express_1["default"].json());
 app.use((0, compression_1["default"])());
@@ -63,9 +59,15 @@ app.use((0, express_session_1["default"])({
     secret: secret,
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose_1["default"].connection }),
+    store: connect_mongo_1["default"].create({ mongoUrl: config_1["default"].get('mongoURL') }),
     cookie: { maxAge: maxAge, sameSite: true, secure: 'auto' }
 }));
+/*
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sess.cookie.secure = true // serve secure cookies
+}
+*/
 // Routes setup
 app.use('/api/auth', auth_1.authRouter);
 app.use('/api/link', link_1.linkRouter);

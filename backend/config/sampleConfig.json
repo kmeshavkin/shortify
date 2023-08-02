@@ -1,6 +1,6 @@
 {
   "port": 8080,
-  "frontendHost": "http://localhost:8080",
+  "frontendHost": "http://localhost:5000",
   "backendHost": "http://localhost:8080",
   "session": {
     "name": "<session name>",
