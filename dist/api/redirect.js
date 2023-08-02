@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.redirectRouter = void 0;
 var express_1 = require("express");
 var Link_1 = require("../models/Link");
@@ -64,7 +64,7 @@ router.get('/:code', function (req, res) { return __awaiter(void 0, void 0, void
                     res.redirect(link.from);
                 else
                     res.status(404).json('Link not found');
-                return [2 /*return*/, link.remove()];
+                return [2 /*return*/, link.deleteOne()];
             case 4:
                 error_1 = _a.sent();
                 return [2 /*return*/, res.status(500).json({ message: 'Something went wrong' })];

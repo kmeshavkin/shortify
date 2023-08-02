@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.authRouter = void 0;
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var config_1 = __importDefault(require("config"));
@@ -48,8 +48,8 @@ var googleapis_1 = require("googleapis");
 var User_1 = require("../models/User");
 var auth_middleware_1 = require("../middleware/auth.middleware");
 var OAuth2 = googleapis_1.google.auth.OAuth2;
-var _a = config_1["default"].get('google'), clientID = _a.clientID, clientSecret = _a.clientSecret, redirectPath = _a.redirectPath, scope = _a.scope;
-var oauth2Client = new OAuth2(clientID, clientSecret, "".concat(config_1["default"].get('frontendHost'), "/").concat(redirectPath));
+var _a = config_1.default.get('google'), clientID = _a.clientID, clientSecret = _a.clientSecret, redirectPath = _a.redirectPath, scope = _a.scope;
+var oauth2Client = new OAuth2(clientID, clientSecret, "".concat(config_1.default.get('frontendHost'), "/").concat(redirectPath));
 var router = (0, express_1.Router)();
 router.post('/login', [
     (0, express_validator_1.check)('email', 'Email cannot be empty').exists({ checkFalsy: true }),
@@ -65,7 +65,7 @@ router.post('/login', [
                 if (!errors.isEmpty()) {
                     return [2 /*return*/, res.status(400).json({
                             errors: errors.array(),
-                            message: 'Incorrect login credentials'
+                            message: 'Incorrect login credentials',
                         })];
                 }
                 _a = req.body, email = _a.email, password = _a.password;
@@ -74,7 +74,7 @@ router.post('/login', [
                 user = _b.sent();
                 if (!user)
                     return [2 /*return*/, res.status(400).json({ message: 'Email not found' })];
-                isMatch = bcryptjs_1["default"].compareSync(password, user.password);
+                isMatch = bcryptjs_1.default.compareSync(password, user.password);
                 if (!isMatch) {
                     return [2 /*return*/, res.status(400).json({ message: 'Incorrect password' })];
                 }
@@ -107,14 +107,14 @@ router.post('/google/redirect', function (req, res, next) { return __awaiter(voi
                 people = googleapis_1.google.people({ version: 'v1', auth: oauth2Client });
                 return [4 /*yield*/, people.people.get({
                         resourceName: 'people/me',
-                        personFields: 'emailAddresses,externalIds'
+                        personFields: 'emailAddresses,externalIds',
                     })];
             case 2:
                 data = (_b.sent()).data;
                 externalId = data.etag;
                 email = data.emailAddresses[0].value;
                 return [4 /*yield*/, User_1.UserModel.findOneAndUpdate({ $or: [{ googleId: externalId }, { email: email }] }, { email: email, password: '', googleId: externalId }, // TODO: make so it doesn't replace existing password
-                    { upsert: true, "new": true })];
+                    { upsert: true, new: true })];
             case 3:
                 candidate = _b.sent();
                 session.userId = candidate.id;
@@ -145,10 +145,10 @@ router.post('/register', [
     (0, express_validator_1.check)('email', 'Email cannot be empty').exists({ checkFalsy: true }),
     (0, express_validator_1.check)('email', 'Wrong email format').isEmail(),
     (0, express_validator_1.check)('password', 'Password length should be at least 6').isLength({
-        min: 6
+        min: 6,
     }),
     (0, express_validator_1.check)('password', 'Password length should be less than 40').isLength({
-        max: 40
+        max: 40,
     }),
 ], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var errors, _a, email, password, candidate, hashedPassword, user, error_3;
@@ -160,7 +160,7 @@ router.post('/register', [
                 if (!errors.isEmpty()) {
                     return [2 /*return*/, res.status(400).json({
                             errors: errors.array(),
-                            message: 'Incorrect credentials'
+                            message: 'Incorrect credentials',
                         })];
                 }
                 _a = req.body, email = _a.email, password = _a.password;
@@ -170,7 +170,7 @@ router.post('/register', [
                 if (candidate) {
                     return [2 /*return*/, res.status(400).json({ message: 'Email already exists' })];
                 }
-                return [4 /*yield*/, bcryptjs_1["default"].hash(password, bcryptjs_1["default"].genSaltSync())];
+                return [4 /*yield*/, bcryptjs_1.default.hash(password, bcryptjs_1.default.genSaltSync())];
             case 2:
                 hashedPassword = _b.sent();
                 user = new User_1.UserModel({ email: email, password: hashedPassword });
@@ -193,7 +193,7 @@ router.post('/session', function (req, res) { return __awaiter(void 0, void 0, v
             session = req.session;
             loginLink = oauth2Client.generateAuthUrl({
                 access_type: 'offline',
-                scope: scope
+                scope: scope,
             });
             return [2 /*return*/, res.json({ loginLink: loginLink, loggedIn: session.userId })];
         }

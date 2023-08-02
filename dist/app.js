@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = __importDefault(require("path"));
 var express_1 = __importDefault(require("express"));
 var mongoose_1 = __importDefault(require("mongoose"));
@@ -50,33 +50,27 @@ var auth_1 = require("./api/auth");
 var link_1 = require("./api/link");
 var redirect_1 = require("./api/redirect");
 var ping_1 = require("./api/ping");
-var _a = config_1["default"].get('session'), name = _a.name, secret = _a.secret, maxAge = _a.maxAge;
-var app = (0, express_1["default"])();
-app.use(express_1["default"].json());
-app.use((0, compression_1["default"])());
-app.use((0, express_session_1["default"])({
+var _a = config_1.default.get('session'), name = _a.name, secret = _a.secret, maxAge = _a.maxAge;
+var app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, compression_1.default)());
+app.use((0, express_session_1.default)({
     name: name,
     secret: secret,
     resave: true,
     saveUninitialized: true,
-    store: connect_mongo_1["default"].create({ mongoUrl: config_1["default"].get('mongoURL') }),
-    cookie: { maxAge: maxAge, sameSite: true, secure: 'auto' }
+    store: connect_mongo_1.default.create({ mongoUrl: config_1.default.get('mongoURL') }),
+    cookie: { maxAge: maxAge, sameSite: true, secure: 'auto' },
 }));
-/*
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-  sess.cookie.secure = true // serve secure cookies
-}
-*/
 // Routes setup
 app.use('/api/auth', auth_1.authRouter);
 app.use('/api/link', link_1.linkRouter);
 app.use('/t', redirect_1.redirectRouter);
 app.use('/info/ping', ping_1.pingRouter);
 if (process.env.NODE_ENV !== 'development') {
-    app.use('/', express_1["default"].static(path_1["default"].join(__dirname, 'build')));
+    app.use('/', express_1.default.static(path_1.default.join(__dirname, 'build')));
     app.get('*', function (req, res) {
-        res.sendFile(path_1["default"].resolve(__dirname, 'build', 'index.html'));
+        res.sendFile(path_1.default.resolve(__dirname, 'build', 'index.html'));
     });
 }
 // Mongo setup and project run point
@@ -85,15 +79,10 @@ if (process.env.NODE_ENV !== 'development') {
         var PORT;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, mongoose_1["default"].connect(config_1["default"].get('mongoURL'), {
-                        useNewUrlParser: true,
-                        useUnifiedTopology: true,
-                        useCreateIndex: true,
-                        useFindAndModify: false
-                    })];
+                case 0: return [4 /*yield*/, mongoose_1.default.connect(config_1.default.get('mongoURL'))];
                 case 1:
                     _a.sent();
-                    PORT = config_1["default"].get('port');
+                    PORT = config_1.default.get('port');
                     app.listen(PORT, function () { return console.log("Started on port ".concat(PORT)); });
                     return [2 /*return*/];
             }

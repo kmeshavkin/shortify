@@ -16,7 +16,7 @@ router.get('/:code', async (req, res) => {
     }
     if (link.clicksLeft === 1) res.redirect(link.from);
     else res.status(404).json('Link not found');
-    return link.remove();
+    return link.deleteOne();
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong' });
   }

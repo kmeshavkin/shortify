@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.linkRouter = void 0;
 var config_1 = __importDefault(require("config"));
 var express_1 = require("express");
@@ -52,7 +52,7 @@ router.post('/generate', function (req, res) { return __awaiter(void 0, void 0, 
             case 0:
                 _b.trys.push([0, 3, , 4]);
                 session = req.session;
-                backendHost = config_1["default"].get('backendHost');
+                backendHost = config_1.default.get('backendHost');
                 _a = req.body, from = _a.from, length_1 = _a.length, clicksLeft = _a.clicksLeft;
                 return [4 /*yield*/, (0, generateId_1.generateSentence)(length_1, 5)];
             case 1:
@@ -63,7 +63,7 @@ router.post('/generate', function (req, res) { return __awaiter(void 0, void 0, 
                     to: to,
                     from: from,
                     owner: session.userId || session.id,
-                    clicksLeft: clicksLeft
+                    clicksLeft: clicksLeft,
                 });
                 return [4 /*yield*/, link.save()];
             case 2:
@@ -84,7 +84,7 @@ router.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 _a.trys.push([0, 2, , 3]);
                 session = req.session;
                 return [4 /*yield*/, Link_1.LinkModel.find({
-                        owner: session.userId || session.id
+                        owner: session.userId || session.id,
                     })];
             case 1:
                 links = _a.sent();
@@ -125,7 +125,7 @@ router.post('/delete/:id', function (req, res) { return __awaiter(void 0, void 0
             case 1:
                 _a.sent();
                 return [4 /*yield*/, Link_1.LinkModel.find({
-                        owner: session.userId || session.id
+                        owner: session.userId || session.id,
                     })];
             case 2:
                 links = _a.sent();

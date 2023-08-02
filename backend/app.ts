@@ -10,7 +10,7 @@ import { linkRouter } from './api/link';
 import { redirectRouter } from './api/redirect';
 import { pingRouter } from './api/ping';
 
-const { name, secret, maxAge } = config.get<any>('session');
+const { name, secret, maxAge } = config.get<{name: string; secret: string; maxAge: number}>('session');
 
 const app = express();
 app.use(express.json());
@@ -41,12 +41,7 @@ if (process.env.NODE_ENV !== 'development') {
 
 // Mongo setup and project run point
 (async function start() {
-  await mongoose.connect(config.get('mongoURL'), {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  });
+  await mongoose.connect(config.get('mongoURL'));
 
   // TODO: Somehow access sessions schema and add hook to remove all links linked to expired session
   // mongoose.model('sessions').collection.watch().stream().on('data', (data) => {
